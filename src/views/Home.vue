@@ -2,6 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <a-button type="primary">提交</a-button>
   </div>
 </template>
 
@@ -15,8 +16,6 @@ import HelloWorld from '@/components/HelloWorld.vue';
   }
 })
 export default class Home extends Vue {
-  mounted() {
-    console.log('BASE_URL: ', process.env.VUE_APP_API);
-  }
+  message = '';
 }
 </script>
