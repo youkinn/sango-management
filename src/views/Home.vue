@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
@@ -14,5 +14,9 @@ import HelloWorld from '@/components/HelloWorld.vue';
     HelloWorld
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  mounted() {
+    console.log('BASE_URL: ', process.env.VUE_APP_API);
+  }
+}
 </script>
