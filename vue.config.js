@@ -16,7 +16,7 @@ module.exports = {
         'https://cdn.jsdelivr.net/npm/vue-router@3.4.2/dist/vue-router.min.js',
         'https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js',
         'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
-        'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.4/lib/index.min.js'
+        'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.4/dist/antd.min.js'
       ]
     };
 

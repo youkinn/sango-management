@@ -2,7 +2,7 @@
   <div>
     <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
       <a-menu-item key="1">
-        <a-icon type="user"/>
+        <a-icon type="user" />
         <span class="nav-text">首页</span>
       </a-menu-item>
     </a-menu>
