@@ -1,11 +1,14 @@
-import path = require('path');
+/* eslint-disable */
+const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const resolve = dir => path.join(__dirname, dir);
 
 module.exports = {
   configureWebpack: config => {
     config.externals = {
       vue: 'Vue',
-      antd: 'ant-design-vue',
+      'ant-design-vue': 'antd',
       'vue-router': 'VueRouter',
       vuex: 'Vuex',
       lodash: '_',
@@ -40,8 +43,6 @@ module.exports = {
     });
 
     // 查看打包文件体积大小
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+    config.plugin('webpack-report').use(BundleAnalyzerPlugin);
   }
 };

@@ -1,4 +1,4 @@
-import _Vue, { DirectiveOptions, DirectiveFunction } from 'vue';
+import { DirectiveOptions, DirectiveFunction } from 'vue';
 
 declare module 'vue/types/vue' {
   interface Vue {
