@@ -5,6 +5,18 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const resolve = dir => path.join(__dirname, dir);
 
 module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: '', // 目标代理接口地址
+        secure: false,
+        changeOrigin: true // 开启代理，在本地创建一个虚拟服务端
+        // pathRewrite: {
+        //   '^/api': '/'
+        // }
+      }
+    }
+  },
   configureWebpack: config => {
     config.externals = {
       vue: 'Vue',
