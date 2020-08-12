@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Autor: 胡椒
+ * @Date: 2020-08-10 09:32:04
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-12 20:14:07
+ */
 import { DirectiveOptions, DirectiveFunction } from 'vue';
 
 declare module 'vue/types/vue' {
@@ -6,10 +13,6 @@ declare module 'vue/types/vue' {
     $api: Api;
   }
 }
-
-type Api = {
-  [key: string]: (params?: any) => Promise<ListResponseData>;
-};
 
 /**
  * 指令定义

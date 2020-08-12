@@ -3,19 +3,20 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 11:39:48
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-11 20:12:27
+ * @LastEditTime: 2020-08-12 20:04:42
  */
 import _Vue from 'vue';
 import * as test from '@/api/test';
+import { message } from 'ant-design-vue';
 
 const modules = [test];
 
-const preHandleResponse = (result: any) => {
-  const { success, data } = result;
-  if (!success) {
+const preHandleResponse = (result: ResponseBody<object>) => {
+  if (!result.success) {
+    message.error('请求异常, 请稍后再试');
     return Promise.reject('请求异常, 请稍后再试');
   }
-  return Promise.resolve(data);
+  return Promise.resolve(result);
 };
 
 const merge = (source: any, target: any) => {
@@ -23,18 +24,12 @@ const merge = (source: any, target: any) => {
   keys.forEach((item = '') => {
     if (!target[item]) {
       Object.defineProperty(target, item, {
-        value: (params: any) => {
-          return source[item](params).then((data: any) => {
-            return preHandleResponse(data);
-          });
+        value: async (...params: []) => {
+          const result = await source[item](...params);
+          return preHandleResponse(result);
         }
       });
     }
-    // target[item] = (params: any) => {
-    //   return source[item](params).then((data: any) => {
-    //     return preHandleResponse(data);
-    //   });
-    // };
   });
 };
 
