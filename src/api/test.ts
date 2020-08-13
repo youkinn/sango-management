@@ -3,16 +3,17 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 11:40:32
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-12 20:05:12
+ * @LastEditTime: 2020-08-13 20:57:14
  */
 import axios from '@/api/axios';
 
 /**
- * 获取用户列表
+ * 获取用户列
  */
-export const getUserList = (
-  params?: object
-): Promise<ResponseBody<ListData>> => {
+export const getUserList = (params?: {
+  /** 页码 */
+  page: number;
+}): Promise<ResponseBody<ListData>> => {
   return axios.get('/api/operators/v1/goods-warning/', { params });
 };
 

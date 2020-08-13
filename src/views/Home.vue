@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-12 20:07:10
+ * @LastEditTime: 2020-08-13 20:57:33
 -->
 <template>
   <div class="home">
@@ -33,6 +33,9 @@ export default class Home extends Vue {
   async getList() {
     const res = await this.$api.getUserList({ page: 2 });
     this.list = res.data.results;
+
+    // 使用lodash
+    console.log(this.$util.now());
   }
 
   async updateRemark() {

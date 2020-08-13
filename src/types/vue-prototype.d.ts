@@ -3,13 +3,17 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-12 20:14:07
+ * @LastEditTime: 2020-08-13 20:39:38
  */
 import { DirectiveOptions, DirectiveFunction } from 'vue';
+import * as _ from 'lodash';
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $util: object;
+    /** Lodash：https://www.lodashjs.com/ */
+    $util: _.LoDashStatic;
+
+    /** Api */
     $api: Api;
   }
 }
