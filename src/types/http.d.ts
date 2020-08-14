@@ -3,9 +3,8 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 13:43:17
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-13 20:53:54
+ * @LastEditTime: 2020-08-14 18:03:03
  */
-
 /**
  * 列表类型接口返回的data
  * @param {number} count 列表数量
@@ -13,7 +12,7 @@
  * @param {boolean} previous 是否有上一条
  * @param {object[]} results 列表数据
  */
-declare interface ListData {
+interface ListData {
   count: number;
   next: boolean;
   previous: boolean;
@@ -27,24 +26,23 @@ declare interface ListData {
  * @param {boolean} success 是否成功
  * @param {any} data 返回的数据
  */
-declare interface ResponseBody<T> {
+interface ResponseBase<T> {
   errorCode: number;
   message: string;
   success: boolean;
   data: T;
 }
 
-/**
- * Api
- */
-declare interface Api {
-  /** 获取用户列表 */
-  getUserList: (params?: { page: number }) => Promise<ResponseBody<ListData>>;
+interface RequestParams {
+  [key: string]: any;
+}
 
-  /** 更新备注 */
-  updateRemark: (params: {
-    id: number;
-    remark: string;
-  }) => Promise<ResponseBody<object>>;
-  [key: string]: (params?: any) => Promise<ResponseBody<any>>;
+/**
+ * 列表接口共同参数
+ * @param page 当前页码
+ * @param pageSize 一页的条数
+ */
+interface PaginationParams {
+  page: number;
+  pageSize: number;
 }
