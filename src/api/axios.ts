@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-14 17:58:49
+ * @LastEditTime: 2020-08-14 18:25:07
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
@@ -13,13 +13,15 @@ const instance = axios.create({
   timeout: 30000
 });
 
+const ERROR_MESSAGE = '请求异常, 请稍后再试';
+
 // 请求拦截器
 instance.interceptors.request.use(
   config => {
     const t = new Date().getTime();
     const params = {
       ...config.params,
-      t
+      t: t
     };
     const method = config.method?.toUpperCase() as string;
     if (method == 'GET') {
@@ -29,9 +31,9 @@ instance.interceptors.request.use(
     }
     return config;
   },
-  error => {
-    message.error(`发送请求出错 msg:${error.message}`);
-    return Promise.resolve(error);
+  err => {
+    message.error(ERROR_MESSAGE);
+    return Promise.resolve(err);
   }
 );
 
@@ -41,26 +43,30 @@ instance.interceptors.response.use(
     if (response && response.data) {
       return Promise.resolve(response);
     } else {
-      return Promise.reject('请求异常, 请联系管理员');
+      message.error(ERROR_MESSAGE);
+      return Promise.reject(response);
     }
   },
-  () => {
-    message.error('请求异常, 请稍后再试');
-    return Promise.reject('请求异常, 请稍后再试');
+  err => {
+    message.error(ERROR_MESSAGE);
+    return Promise.reject(err);
   }
 );
 
 /** 发起一个请求 */
 const request = <T>(config: AxiosRequestConfig): Promise<ResponseBase<T>> => {
   return new Promise((resolve, reject) => {
-    instance.request<ResponseBase<T>>(config).then(res => {
-      const result = res.data;
-      if (result.success) {
-        resolve(result);
-      } else {
-        reject(result);
-      }
-    });
+    instance.request<ResponseBase<T>>(config).then(
+      res => {
+        const result = res.data;
+        if (result.success) {
+          resolve(result);
+        } else {
+          reject(result);
+        }
+      },
+      err => reject(err)
+    );
   });
 };
 
