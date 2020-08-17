@@ -1,19 +1,25 @@
 /* eslint-disable */
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const resolve = dir => path.join(__dirname, dir);
 
 module.exports = {
   devServer: {
-    proxy: {
-      '/api': {
-        target: '', // 目标代理接口地址
-        secure: false,
-        changeOrigin: true // 开启代理，在本地创建一个虚拟服务端
-        // pathRewrite: {
-        //   '^/api': '/'
-        // }
+    // proxy: {
+    //   '/api': {
+    //     target: '', // 目标代理接口地址
+    //     secure: false,
+    //     changeOrigin: true // 开启代理，在本地创建一个虚拟服务端
+    //     // pathRewrite: {
+    //     //   '^/api': '/'
+    //     // }
+    //   }
+    // }
+  },
+  css: {
+    loaderOptions: {
+      less: {
+        javascriptEnabled: true
       }
     }
   },
@@ -33,9 +39,7 @@ module.exports = {
 
     // 配置cdn 在html中通过htmlWebpackPlugin.options.cdn访问
     const cdn = {
-      css: [
-        'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.4/dist/antd.min.css'
-      ],
+      css: [],
       js: [
         'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js',
         'https://cdn.jsdelivr.net/npm/vue-router@3.4.2/dist/vue-router.min.js',

@@ -20,6 +20,7 @@
           minHeight: '280px'
         }"
       >
+        <Breadcrumb class="breadcrumb"></Breadcrumb>
         <router-view />
       </a-layout-content>
     </a-layout>
@@ -28,11 +29,13 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import Menu from '@/components/layout/menu.vue';
+import Breadcrumb from '@/components/layout/breadcrumb.vue';
 
 @Component({
   name: 'Home',
   components: {
-    Menu
+    Menu,
+    Breadcrumb
   }
 })
 export default class App extends Vue {
@@ -59,5 +62,8 @@ export default class App extends Vue {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+}
+.breadcrumb {
+  margin-bottom: 20px;
 }
 </style>
