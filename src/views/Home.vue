@@ -2,8 +2,8 @@
  * @Description:
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
- * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-20 13:54:13
+ * @LastEditors: youkinn
+ * @LastEditTime: 2020-08-21 01:24:40
 -->
 <template>
   <div class="home">
@@ -55,12 +55,14 @@ export default class Home extends Vue {
   async handleSubmit(e: Event) {
     e.preventDefault();
     this.form.validateFields(async (err: Error[], values: AFrom) => {
-      if (!err) {
-        const { success } = await addUser(values);
-        if (success) {
-          this.$message.success('添加成功');
-          this.getList();
-        }
+      if (err) {
+        console.log(err);
+        return;
+      }
+      const { success } = await addUser(values);
+      if (success) {
+        this.$message.success('添加成功');
+        this.getList();
       }
     });
   }

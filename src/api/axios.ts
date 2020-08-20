@@ -2,8 +2,8 @@
  * @Description:
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
- * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-20 13:50:09
+ * @LastEditors: youkinn
+ * @LastEditTime: 2020-08-21 01:37:33
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
@@ -14,7 +14,7 @@ const instance = axios.create({
   timeout: 30000
 });
 
-const ERROR_MESSAGE = '请求异常, 请稍后再试';
+const ERROR_MESSAGE = '哎呀, 服务器开小差了';
 
 // 请求拦截器
 instance.interceptors.request.use(
@@ -55,7 +55,7 @@ instance.interceptors.response.use(
     }
   },
   err => {
-    message.error(ERROR_MESSAGE);
+    message.error('哎呀, 请求出问题了');
     return Promise.reject(err);
   }
 );
