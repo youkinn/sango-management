@@ -2,19 +2,21 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const resolve = dir => path.join(__dirname, dir);
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   devServer: {
-    // proxy: {
-    //   '/api': {
-    //     target: '', // 目标代理接口地址
-    //     secure: false,
-    //     changeOrigin: true // 开启代理，在本地创建一个虚拟服务端
-    //     // pathRewrite: {
-    //     //   '^/api': '/'
-    //     // }
-    //   }
-    // }
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: process.env.VUE_APP_API_HOST, // 目标代理接口地址
+        secure: false,
+        changeOrigin: true, // 开启代理，在本地创建一个虚拟服务端
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   },
   css: {
     loaderOptions: {
@@ -59,6 +61,8 @@ module.exports = {
     });
 
     // 查看打包文件体积大小
-    config.plugin('webpack-report').use(BundleAnalyzerPlugin);
+    if (isProd) {
+      config.plugin('webpack-report').use(BundleAnalyzerPlugin);
+    }
   }
 };

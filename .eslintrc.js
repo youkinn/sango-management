@@ -16,11 +16,13 @@ module.exports = {
   globals: {
     Vue: true,
     _: true,
+    antd: true,
     axios: true
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    '@typescript-eslint/no-var-requires': 'off'
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': ['off']
   }
 };

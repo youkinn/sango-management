@@ -3,8 +3,9 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 13:43:17
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-14 18:03:03
+ * @LastEditTime: 2020-08-20 14:21:17
  */
+
 /**
  * 列表类型接口返回的data
  * @param {number} count 列表数量
@@ -14,8 +15,8 @@
  */
 interface ListData {
   count: number;
-  next: boolean;
-  previous: boolean;
+  next?: boolean;
+  previous?: boolean;
   results: object[];
 }
 

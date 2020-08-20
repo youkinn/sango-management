@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
+    alias: '/home',
     name: '首页',
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
   },

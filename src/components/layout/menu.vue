@@ -3,19 +3,19 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-17 20:40:38
+ * @LastEditTime: 2020-08-18 10:56:45
 -->
 <template>
   <div>
     <a-menu theme="dark" mode="inline" :default-selected-keys="['home']" @click="handleClicked">
       <a-menu-item key="home">
         <a-icon type="user" />
-        <router-link to="/" tag="span">首页</router-link>
+        <span>首页</span>
       </a-menu-item>
       <a-sub-menu key="base">
         <span slot="title"><a-icon type="team" /><span>基础信息</span></span>
-        <a-menu-item key="1">
-          <router-link to="/base/dictionary" tag="span">字典管理</router-link>
+        <a-menu-item key="dictionary">
+          <span>字典管理</span>
         </a-menu-item>
       </a-sub-menu>
     </a-menu>
@@ -34,8 +34,18 @@ export default class Menu1 extends Vue {
   rootSubmenuKeys = ['home', 'base'];
   openKeys = ['home'];
 
-  handleClicked = ({ item = {}, key = '', keyPath = '' }) => {
-    console.log(item, key, keyPath);
+  handleClicked = ({ keyPath = [] }) => {
+    let toPath = '';
+    const currentPath = this.$route.path;
+    const [routeName, moduleName] = keyPath;
+    if (moduleName && routeName) {
+      toPath = `/${moduleName}/${routeName}`;
+    } else if (routeName) {
+      toPath = `/${routeName}`;
+    }
+    if (toPath && toPath !== currentPath) {
+      this.$router.push(toPath);
+    }
   };
 }
 </script>

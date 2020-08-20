@@ -3,10 +3,11 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-14 18:25:07
+ * @LastEditTime: 2020-08-20 13:50:09
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
+const qs = require('qs');
 
 const instance = axios.create({
   baseURL: process.env.VUE_API_BASE_URL,
@@ -18,16 +19,22 @@ const ERROR_MESSAGE = '请求异常, 请稍后再试';
 // 请求拦截器
 instance.interceptors.request.use(
   config => {
+    const { csrfToken } = qs.parse(document.cookie);
+    config.headers = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'x-csrf-token': csrfToken
+    };
     const t = new Date().getTime();
     const params = {
       ...config.params,
-      t: t
+      t
     };
     const method = config.method?.toUpperCase() as string;
     if (method == 'GET') {
       config.params = params;
     } else if (['POST', 'PATCH', 'PUT'].indexOf(method) > -1) {
-      config.data = params;
+      config.params = null;
+      config.data = qs.stringify(params);
     }
     return config;
   },
@@ -85,9 +92,7 @@ export const POST = <T>(
   params: RequestParams,
   options?: AxiosRequestConfig
 ): Promise<ResponseBase<T>> => {
-  return request(
-    Object.assign({}, { url: url, method: 'POST', params }, options)
-  );
+  return request(Object.assign({}, { url: url, method: 'POST', params }, options));
 };
 
 export default { GET, POST };
