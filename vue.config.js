@@ -6,7 +6,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   devServer: {
-    port: 3000,
+    port: 8090,
     proxy: {
       '/api': {
         target: process.env.VUE_APP_API_HOST, // 目标代理接口地址
