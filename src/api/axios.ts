@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-20 13:50:09
+ * @LastEditTime: 2020-08-21 14:36:57
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
@@ -69,6 +69,7 @@ const request = <T>(config: AxiosRequestConfig): Promise<ResponseBase<T>> => {
         if (result.success) {
           resolve(result);
         } else {
+          message.error(result.message || ERROR_MESSAGE);
           reject(result);
         }
       },
