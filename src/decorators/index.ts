@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-21 12:47:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-21 13:52:54
+ * @LastEditTime: 2020-08-22 18:05:11
  */
 import ExtendedVue from 'vue';
 
@@ -22,5 +22,5 @@ export const throttle = (
   propertyKey: string,
   descriptor: PropertyDescriptor
 ): void => {
-  descriptor.value = target.$util.throttle(descriptor.value, 3000);
+  descriptor.value = target.$util?.throttle(descriptor.value, 3000);
 };
