@@ -2,8 +2,8 @@
  * @Description: 自定义装饰器
  * @Autor: 胡椒
  * @Date: 2020-08-21 12:47:10
- * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-24 17:46:26
+ * @LastEditors: youkinn
+ * @LastEditTime: 2020-08-25 02:13:11
  */
 import { debounce as debounceFn, throttle as throttleFn } from 'lodash';
 import ExtendedVue from 'vue';

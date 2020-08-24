@@ -2,8 +2,8 @@
  * @Description: 列表页
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
- * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-24 21:08:32
+ * @LastEditors: youkinn
+ * @LastEditTime: 2020-08-25 00:23:34
 -->
 <template>
   <div class="list">
@@ -16,8 +16,8 @@
       :locale="{ filterConfirm: '暂无数据' }"
       @change="handleTableChange"
     >
-      <template slot="operation" slot-scope="record">
-        <a-button type="primary" size="small" @click="edit(record)">编辑</a-button>
+      <template slot="operation">
+        <a-button type="primary" size="small">编辑</a-button>
       </template>
     </a-table>
   </div>
@@ -60,10 +60,6 @@ export default class Test extends List {
     const res = await getUserList({ page: 2, pageSize: 10 });
     this.list = res.data.results;
     this.pagination.total = res.data.count;
-  }
-
-  click(record) {
-    console.log(record);
   }
 }
 </script>

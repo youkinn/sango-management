@@ -2,10 +2,14 @@
  * @Author: youkinn
  * @Date: 2020-08-09 17:29:29
  * @LastEditors: youkinn
- * @LastEditTime: 2020-08-09 21:06:57
+ * @LastEditTime: 2020-08-25 01:20:57
  * @Description: 常亮定义
  */
-export const enum Sex {
-  Man = 1,
-  Woman = 2
+
+/** 编辑模式 */
+export const enum EditMode {
+  /** 新增 */
+  ADD = 1,
+  /** 编辑 */
+  EDIT = 2
 }
