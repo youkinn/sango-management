@@ -11,6 +11,11 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
   },
   {
+    path: '/test',
+    name: '测试页面',
+    component: () => import(/* webpackChunkName: "test" */ '@/views/test/index.vue')
+  },
+  {
     path: '/base',
     redirect: '/base/dictionary',
     name: '基础信息',

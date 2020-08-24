@@ -1,19 +1,19 @@
 /*
+ * @Description: 加载当前目录下以Dir.ts结尾的文件并注册为指令
  * @Author: youkinn
  * @Date: 2020-08-09 17:44:29
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-10 00:44:24
- * @Description: 指令
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-24 17:38:13
  */
+
 import _Vue, { PluginObject } from 'vue';
 import { DirectiveDefinition } from '@/types/vue-prototype';
-import focus from './focus';
-
-const result = [focus];
 
 const directives: PluginObject<object> = {
   install(Vue: typeof _Vue) {
-    result.forEach(({ id, definition }: DirectiveDefinition) => {
+    const contexts = require.context('.', false, /Dir\.ts$/);
+    contexts.keys().forEach(item => {
+      const { id, definition }: DirectiveDefinition = contexts(item).default;
       Vue.directive(id, definition);
     });
   }

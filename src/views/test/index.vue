@@ -1,30 +1,35 @@
 <!--
- * @Description:
+ * @Description: 测试页面
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-24 00:16:12
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-24 17:35:57
 -->
 <template>
   <div class="home">
-    <!-- <a-form
+    <a-form
       :form="form"
       :label-col="{ span: 5 }"
       :wrapper-col="{ span: 12 }"
       @submit.prevent="handleSubmit"
     >
       <a-form-item label="Note">
-        <a-input v-decorator="['name', options.name]" :maxLength="20" placeholder="请输入姓名" />
+        <a-input
+          v-focus
+          v-decorator="['name', options.name]"
+          :maxLength="20"
+          placeholder="请输入姓名"
+        />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
         <a-button class="submitButton" type="primary" html-type="submit">提交</a-button>
-        <button class="testBtn" @click="clickHandler"></button>
       </a-form-item>
-    </a-form> -->
-    <button class="testBtn" @click="handleSubmit"></button>
-    <div class="name">{{ name + '1' }}</div>
+    </a-form>
+    <button class="testBtn" @click="handleSubmit">提交</button>
     <div>
-      <p v-for="(item, index) in list" :key="index">{{ item._id }}-{{ item.name }}</p>
+      <p v-for="(item, index) in list" :key="index">
+        {{ item._id }}-{{ item.name | dftValueFilter }}
+      </p>
     </div>
   </div>
 </template>
