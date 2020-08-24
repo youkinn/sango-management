@@ -2,8 +2,8 @@
  * @Description:
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-23 23:38:51
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-24 17:47:32
 -->
 <template>
   <div class="home">
@@ -65,7 +65,7 @@ export default class Home extends Vue {
     this.list = res.data.results;
   }
 
-  @throttle(3000)
+  @throttle()
   async handleSubmit() {
     const formData: AFrom = await this.form.validateFields();
     await addUser(formData);
