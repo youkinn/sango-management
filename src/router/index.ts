@@ -12,8 +12,23 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/test',
-    name: '测试页面',
-    component: () => import(/* webpackChunkName: "test" */ '@/views/test/index.vue')
+    redirect: '/test/list',
+    name: '测试',
+    component: () => import(/* webpackChunkName: "base" */ '@/views/layout.vue'),
+    children: [
+      {
+        path: 'list',
+        name: '列表页面',
+        meta: {
+          breadcrumb: [
+            {
+              name: '测试'
+            }
+          ]
+        },
+        component: () => import(/* webpackChunkName: "test.list" */ '@/views/test/list.vue')
+      }
+    ]
   },
   {
     path: '/base',

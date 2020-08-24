@@ -17,7 +17,8 @@ module.exports = {
     Vue: true,
     _: true,
     antd: true,
-    axios: true
+    axios: true,
+    Base: true
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',

@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-24 17:35:57
+ * @LastEditTime: 2020-08-24 20:41:49
 -->
 <template>
   <div class="home">
@@ -31,11 +31,13 @@
         {{ item._id }}-{{ item.name | dftValueFilter }}
       </p>
     </div>
+    <Base />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import List from '@/components/global/List';
+import { Component, Prop } from 'vue-property-decorator';
 import { getUserList, addUser } from '@/api/index';
 import { throttle } from '@/decorators';
 
@@ -44,7 +46,7 @@ interface AFrom {
 }
 
 @Component
-export default class Test extends Vue {
+export default class Test extends List {
   @Prop() private clickHandler!: Function;
   name = '';
   list: object[] = [];
@@ -67,6 +69,7 @@ export default class Test extends Vue {
   }
 
   created() {
+    console.log(11, this.loading);
     this.getList();
   }
 
