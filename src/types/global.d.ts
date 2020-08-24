@@ -1,7 +1,9 @@
 /* eslint-disable */
 import Antd from 'ant-design-vue';
+import * as lodash from 'lodash';
 
 declare global {
-  const antd: typeof Antd;
   const Vue: typeof Vue;
+  const antd: typeof Antd;
+  const _: typeof lodash;
 }

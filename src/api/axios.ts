@@ -2,8 +2,8 @@
  * @Description:
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
- * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-21 14:36:57
+ * @LastEditors: youkinn
+ * @LastEditTime: 2020-08-23 09:11:03
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
@@ -29,7 +29,7 @@ instance.interceptors.request.use(
       ...config.params,
       t
     };
-    const method = config.method?.toUpperCase() as string;
+    const method = config.method!.toUpperCase() as string;
     if (method == 'GET') {
       config.params = params;
     } else if (['POST', 'PATCH', 'PUT'].indexOf(method) > -1) {
