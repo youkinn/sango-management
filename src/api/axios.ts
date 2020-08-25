@@ -2,15 +2,15 @@
  * @Description:
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-23 09:11:03
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-25 20:14:56
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
 const qs = require('qs');
 
 const instance = axios.create({
-  baseURL: process.env.VUE_API_BASE_URL,
+  baseURL: process.env.VUE_APP_API_BASE_PATH,
   timeout: 30000
 });
 
@@ -29,10 +29,10 @@ instance.interceptors.request.use(
       ...config.params,
       t
     };
-    const method = config.method!.toUpperCase() as string;
-    if (method == 'GET') {
+    const method = config.method?.toUpperCase() as string;
+    if (['GET', 'DELETE', 'HEAD', 'OPTIONS'].includes(method)) {
       config.params = params;
-    } else if (['POST', 'PATCH', 'PUT'].indexOf(method) > -1) {
+    } else if (['POST', 'PATCH', 'PUT'].includes(method)) {
       config.params = null;
       config.data = qs.stringify(params);
     }
@@ -87,6 +87,15 @@ export const GET = <T>(
   return request(Object.assign({ url: url, method: 'GET', params }, options));
 };
 
+/** 发起一个DELETE请求 */
+export const DELETE = <T>(
+  url: string,
+  params?: RequestParams,
+  options?: AxiosRequestConfig
+): Promise<ResponseBase<T>> => {
+  return request(Object.assign({ url: url, method: 'DELETE', params }, options));
+};
+
 /** 发起一个POST请求 */
 export const POST = <T>(
   url: string,
@@ -94,6 +103,15 @@ export const POST = <T>(
   options?: AxiosRequestConfig
 ): Promise<ResponseBase<T>> => {
   return request(Object.assign({}, { url: url, method: 'POST', params }, options));
+};
+
+/** 发起一个PATCH请求 */
+export const PATCH = <T>(
+  url: string,
+  params: RequestParams,
+  options?: AxiosRequestConfig
+): Promise<ResponseBase<T>> => {
+  return request(Object.assign({}, { url: url, method: 'PATCH', params }, options));
 };
 
 export default { GET, POST };

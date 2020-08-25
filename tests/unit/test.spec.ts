@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Test from '@/views/test/index.vue';
-import antd, { Button } from 'ant-design-vue';
+import antd from 'ant-design-vue';
 import sinon from 'sinon';
 
 const localVue = createLocalVue();

@@ -1,4 +1,4 @@
-/** 用户列表查询参数 */
+/** 字典列表查询参数 */
 export interface DictionaryListQueryParams extends PaginationParams {
   /** 字典编码 */
   code?: string;

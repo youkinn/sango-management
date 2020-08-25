@@ -33,12 +33,12 @@ import { EditMode } from '@/const';
 @Component
 export default class DictionaryModalEdit extends Form {
   @Prop({ default: EditMode.ADD }) private editMode!: number; // 编辑模式
-  @Prop({ default: {} }) private data!: any; // 编辑模式下回显数据用载体
+  @Prop({ default: () => {} }) private data!: any; // 编辑模式下回显数据用载体
 
   // 表单字段描述
   public descriptor = {
     code: {
-      initialValue: this.editMode === EditMode.ADD ? '' : this.data.code,
+      initialValue: this.data.code,
       rules: [
         {
           required: true,
@@ -47,7 +47,7 @@ export default class DictionaryModalEdit extends Form {
       ]
     },
     name: {
-      initialValue: this.editMode === EditMode.ADD ? '' : this.data.name,
+      initialValue: this.data.name,
       rules: [
         {
           required: true,
@@ -56,7 +56,7 @@ export default class DictionaryModalEdit extends Form {
       ]
     },
     desc: {
-      initialValue: this.editMode === EditMode.ADD ? '' : this.data.desc,
+      initialValue: this.data.desc,
       rules: [
         {
           max: 20,
@@ -65,9 +65,5 @@ export default class DictionaryModalEdit extends Form {
       ]
     }
   };
-
-  beforeCreate() {
-    this.form = this.$form.createForm(this);
-  }
 }
 </script>

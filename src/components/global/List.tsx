@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-24 17:50:28
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-24 20:41:24
+ * @LastEditTime: 2020-08-25 20:15:35
  */
 import { Vue, Component } from 'vue-property-decorator';
 import { VNode } from 'vue';
@@ -29,12 +29,13 @@ interface Pagination {
   onShowSizeChange: (current: number, pageSize: number) => void;
 }
 
-export default abstract class List extends Vue {
+@Component
+export default class List extends Vue {
   /** 加载中 */
   protected loading = false;
 
   /** 分页信息 */
-  protected pagination: Pagination = {
+  public pagination: Pagination = {
     current: 1,
     pageSize: pageSize,
     pageSizeOptions: ['10', '20', '30', '40', '50'],
@@ -43,13 +44,15 @@ export default abstract class List extends Vue {
       `共 ${total} 条记录 第 ${this.pagination.current}/${Math.ceil(total / pageSize)} 页`,
     showQuickJumper: true,
     showSizeChanger: true,
-    onShowSizeChange: (current: number, pageSize: number) => (this.pagination.pageSize = pageSize)
+    onShowSizeChange: (current: number, pageSize: number) => {
+      this.pagination.pageSize = pageSize;
+    }
   };
 
-  abstract getList(): void;
+  getList() {}
 
   // 分页
-  protected handleTableChange(pagination: Pagination) {
+  handleTableChange(pagination: Pagination) {
     if (pagination) {
       this.pagination.current = pagination.current;
     }

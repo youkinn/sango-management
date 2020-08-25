@@ -12,9 +12,6 @@ module.exports = {
         target: process.env.VUE_APP_API_HOST, // 目标代理接口地址
         secure: false,
         changeOrigin: true, // 开启代理，在本地创建一个虚拟服务端
-        pathRewrite: {
-          '^/api': ''
-        }
       }
     }
   },

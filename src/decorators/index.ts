@@ -2,8 +2,8 @@
  * @Description: 自定义装饰器
  * @Autor: 胡椒
  * @Date: 2020-08-21 12:47:10
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-25 02:13:11
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-25 13:42:30
  */
 import { debounce as debounceFn, throttle as throttleFn } from 'lodash';
 import ExtendedVue from 'vue';
@@ -21,3 +21,19 @@ export const throttle = (wait = 3000): Function => {
     descriptor.value = throttleFn(descriptor.value, wait, { trailing: false });
   };
 };
+
+/** 捕获异常处理-将传入的函数用try catch块包裹 */
+export function catchError(
+  target: ExtendedVue,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+): void {
+  const fn = descriptor.value;
+  descriptor.value = function(...args: any[]) {
+    try {
+      fn.apply(this, args);
+    } catch (ex) {
+      console.log(11, ex);
+    }
+  };
+}
