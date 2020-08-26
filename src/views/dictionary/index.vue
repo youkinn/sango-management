@@ -44,6 +44,7 @@ import { getDictionaryList, addDictionary, editDictionary, delDictionary } from 
 import { EditMode } from '@/const';
 import { DictionaryForm } from '@/types/api';
 import { timeSpanFormat } from '@/utils';
+import { validate, required } from '@/decorators';
 import DictionaryEditForm from '@/components/dictionary/dictionary-edit-form.vue';
 
 const columns = [
@@ -148,7 +149,8 @@ export default class Dictionary extends List {
   }
 
   // 删除字典
-  async del(_id: string) {
+  @validate
+  del(@required _id: string) {
     const that = this;
     this.$confirm({
       title: '确定要删除该数据吗?',
