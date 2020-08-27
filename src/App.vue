@@ -1,33 +1,36 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div class="logo" />
-      <Menu></Menu>
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
-        />
-      </a-layout-header>
-      <a-layout-content
-        :style="{
-          margin: '24px 16px',
-          padding: '24px',
-          background: '#fff',
-          minHeight: '280px'
-        }"
-      >
-        <Breadcrumb class="breadcrumb"></Breadcrumb>
-        <router-view />
-      </a-layout-content>
+  <a-config-provider :locale="locale">
+    <a-layout id="components-layout-demo-custom-trigger">
+      <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+        <div class="logo" />
+        <Menu></Menu>
+      </a-layout-sider>
+      <a-layout>
+        <a-layout-header style="background: #fff; padding: 0">
+          <a-icon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="() => (collapsed = !collapsed)"
+          />
+        </a-layout-header>
+        <a-layout-content
+          :style="{
+            margin: '24px 16px',
+            padding: '24px',
+            background: '#fff',
+            minHeight: '280px'
+          }"
+        >
+          <Breadcrumb class="breadcrumb"></Breadcrumb>
+          <router-view />
+        </a-layout-content>
+      </a-layout>
     </a-layout>
-  </a-layout>
+  </a-config-provider>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import Menu from '@/components/layout/menu.vue';
 import Breadcrumb from '@/components/layout/breadcrumb.vue';
 
@@ -40,6 +43,7 @@ import Breadcrumb from '@/components/layout/breadcrumb.vue';
 })
 export default class App extends Vue {
   collapsed = false;
+  locale = zhCN;
 }
 </script>
 <style>

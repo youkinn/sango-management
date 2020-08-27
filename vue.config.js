@@ -45,6 +45,8 @@ module.exports = {
         'https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js',
         'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
         'https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js',
+        'https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js',
+        'https://cdn.jsdelivr.net/npm/moment@2.27.0/locale/zh-cn.js',
         'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.4/dist/antd.min.js'
       ]
     };
