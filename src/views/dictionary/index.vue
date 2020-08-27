@@ -1,10 +1,15 @@
 <template>
   <div class="list">
-    <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="onEdit">
+    <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="onEdit" @change="refresh">
       <a-tab-pane tab="字典列表" :closable="false" key="dictionary">
         <dictionary-list @viewContent="viewContent"></dictionary-list>
       </a-tab-pane>
-      <a-tab-pane v-for="item in panes" :key="item.key" :tab="item.title" :closable="item.closable">
+      <a-tab-pane
+        v-for="item in panes.slice(1)"
+        :key="item.key"
+        :tab="item.title"
+        :closable="item.closable"
+      >
         <router-view></router-view>
       </a-tab-pane>
     </a-tabs>
@@ -23,7 +28,9 @@ interface Pane {
   closable: boolean;
 }
 
-const panes: Pane[] = [];
+const panes: Pane[] = [
+  { key: 'dictionary', title: '字典列表', path: '/base/dictionary/directory', closable: false }
+];
 
 @Component({
   components: { DictionaryList }
@@ -49,10 +56,11 @@ export default class Dictionary extends Vue {
       });
     }
     this.activeKey = activeKey;
-    this.go(path);
+    this.$router.push(path);
   }
 
-  go(path: string) {
+  refresh(targetKey: string) {
+    const path = this.panes.filter(pane => pane.key === targetKey)[0].path;
     this.$router.push(path);
   }
 
@@ -66,11 +74,7 @@ export default class Dictionary extends Vue {
     const panes = this.panes.filter(pane => pane.key === targetKey);
     const index = this.panes.indexOf(panes[0]);
     this.panes.splice(index, 1);
-    if (this.panes.length === 0) {
-      this.activeKey = 'dictionary';
-    } else {
-      this.activeKey = this.panes[lastIndex].key;
-    }
+    this.activeKey = this.panes[lastIndex].key;
   }
 }
 </script>
