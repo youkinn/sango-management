@@ -31,13 +31,12 @@ const routes: Array<RouteConfig> = [
     ]
   },
   {
-    path: '/base',
-    redirect: '/base/dictionary',
+    path: '/base/dictionary',
     name: '基础信息',
-    component: () => import(/* webpackChunkName: "base" */ '@/views/layout.vue'),
+    component: () => import(/* webpackChunkName: "base" */ '@/views/dictionary/index.vue'),
     children: [
       {
-        path: 'dictionary',
+        path: 'directory',
         name: '字典管理',
         meta: {
           breadcrumb: [
@@ -46,7 +45,23 @@ const routes: Array<RouteConfig> = [
             }
           ]
         },
-        component: () => import(/* webpackChunkName: "dictionary" */ '@/views/dictionary/index.vue')
+        component: () =>
+          import(/* webpackChunkName: "directory" */ '@/views/dictionary/dictionary-list.vue')
+      },
+      {
+        path: 'content/:id',
+        name: '内容管理',
+        meta: {
+          breadcrumb: [
+            {
+              name: '基本信息'
+            }
+          ]
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "dictionary-content" */ '@/views/dictionary/dictionary-content.vue'
+          )
       }
     ]
   },
