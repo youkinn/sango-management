@@ -1,8 +1,8 @@
 <template>
   <div class="list">
-    <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="onEdit" @change="refresh">
-      <a-tab-pane tab="字典列表" :closable="false" key="dictionary">
-        <dictionary-list @viewContent="viewContent"></dictionary-list>
+    <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="edit" @change="refresh">
+      <a-tab-pane :tab="pane.title" :closable="pane.closable" :key="pane.key">
+        <dictionary-list @viewContent="add"></dictionary-list>
       </a-tab-pane>
       <a-tab-pane
         v-for="item in panes.slice(1)"
@@ -17,64 +17,26 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import TabIndex from '@/components/global/TabIndex';
 import DictionaryList from './dictionary-list.vue';
 
-interface Pane {
-  key: string;
-  title: string;
-  path: string;
-  closable: boolean;
-}
-
-const panes: Pane[] = [
-  { key: 'dictionary', title: '字典列表', path: '/base/dictionary/directory', closable: false }
-];
+const DictionaryPane: Pane = {
+  key: 'dictionary',
+  title: '字典目录',
+  path: '/base/dictionary/directory',
+  closable: false
+};
 
 @Component({
   components: { DictionaryList }
 })
-export default class Dictionary extends Vue {
-  private activeKey = 'dictionary';
-  newTabIndex = 0;
-  panes = panes;
+export default class Dictionary extends TabIndex {
+  pane = DictionaryPane;
 
-  onEdit(targetKey: string, action: string) {
-    (this as any)[action](targetKey);
-  }
-
-  viewContent(_id: string, title: string, path: string) {
-    const activeKey = `newTab-${_id}`;
-    const panes = this.panes.filter(item => item.key === activeKey);
-    if (panes.length === 0) {
-      this.panes.push({
-        title: title,
-        key: activeKey,
-        path: path,
-        closable: true
-      });
-    }
-    this.activeKey = activeKey;
-    this.$router.push(path);
-  }
-
-  refresh(targetKey: string) {
-    const path = this.panes.filter(pane => pane.key === targetKey)[0].path;
-    this.$router.push(path);
-  }
-
-  remove(targetKey: string) {
-    let lastIndex = 0;
-    this.panes.forEach((pane, i) => {
-      if (pane.key === targetKey) {
-        lastIndex = i - 1;
-      }
-    });
-    const panes = this.panes.filter(pane => pane.key === targetKey);
-    const index = this.panes.indexOf(panes[0]);
-    this.panes.splice(index, 1);
-    this.activeKey = this.panes[lastIndex].key;
+  created() {
+    this.panes.push(DictionaryPane);
+    this.activeKey = this.panes[0].key;
   }
 }
 </script>

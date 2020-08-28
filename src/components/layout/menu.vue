@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-18 10:56:45
+ * @LastEditTime: 2020-08-28 10:01:01
 -->
 <template>
   <div>
@@ -14,7 +14,7 @@
       </a-menu-item>
       <a-sub-menu key="base">
         <span slot="title"><a-icon type="team" /><span>基础信息</span></span>
-        <a-menu-item key="dictionary">
+        <a-menu-item key="dictionary/directory">
           <span>字典管理</span>
         </a-menu-item>
       </a-sub-menu>

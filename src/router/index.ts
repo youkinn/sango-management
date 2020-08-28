@@ -37,7 +37,7 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: 'directory',
-        name: '字典管理',
+        name: '字典目录管理',
         meta: {
           breadcrumb: [
             {
@@ -49,7 +49,7 @@ const routes: Array<RouteConfig> = [
           import(/* webpackChunkName: "directory" */ '@/views/dictionary/dictionary-list.vue')
       },
       {
-        path: 'content/:id',
+        path: 'content/:directoryId',
         name: '内容管理',
         meta: {
           breadcrumb: [
