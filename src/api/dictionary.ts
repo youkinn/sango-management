@@ -3,11 +3,15 @@
  * @Author: youkinn
  * @Date: 2020-08-25 00:23:54
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-25 19:52:27
+ * @LastEditTime: 2020-08-28 17:51:03
  *
  */
 import { GET, POST, PATCH, DELETE } from '@/api/axios';
-import { DictionaryListQueryParams, DictionaryForm } from '@/types/api/index';
+import {
+  DictionaryListQueryParams,
+  DictionaryForm,
+  DictionaryContentForm
+} from '@/types/api/index';
 
 /** 获取字典列表 */
 export const getDictionaryList = (
@@ -32,4 +36,34 @@ export const editDictionary = (
 /** 删除字典 */
 export const delDictionary = (id: string): Promise<ResponseBase<object>> => {
   return DELETE(`/dictionary/${id}`);
+};
+
+/** 获取字典内容列表 */
+export const getDictionaryContentList = (dictionaryId: string): Promise<ResponseBase<ListData>> => {
+  return GET(`/dictionary/${dictionaryId}/contents`);
+};
+
+/** 添加字典内容 */
+export const addDictionaryContent = (
+  dictionaryId: string,
+  params: DictionaryContentForm
+): Promise<ResponseBase<object>> => {
+  return POST(`/dictionary/${dictionaryId}/content`, params);
+};
+
+/** 编辑字典内容 */
+export const editDictionaryContent = (
+  dictionaryId: string,
+  contentId: string,
+  params: DictionaryContentForm
+): Promise<ResponseBase<object>> => {
+  return PATCH(`/dictionary/${dictionaryId}/content/${contentId}`, params);
+};
+
+/** 删除字典内容 */
+export const delDictionaryContent = (
+  dictionaryId: string,
+  contentId: string
+): Promise<ResponseBase<object>> => {
+  return DELETE(`/dictionary/${dictionaryId}/content/${contentId}`);
 };

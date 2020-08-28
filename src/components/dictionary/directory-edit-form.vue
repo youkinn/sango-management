@@ -1,3 +1,10 @@
+<!--
+ * @Description: 字典目录新增/编辑表单
+ * @Autor: 胡椒
+ * @Date: 2020-08-25 09:31:09
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-08-28 17:55:39
+-->
 <template>
   <a-form
     :form="form"
@@ -11,7 +18,7 @@
     <a-form-item label="字典名称">
       <a-input v-decorator="['name', descriptor.name]" :maxLength="20" placeholder="请输入名字" />
     </a-form-item>
-    <a-form-item label="字典名称">
+    <a-form-item label="字典描述">
       <a-textarea
         v-decorator="['desc', descriptor.desc]"
         :auto-size="{ minRows: 3, maxRows: 6 }"
@@ -31,12 +38,12 @@ import { Component, Prop } from 'vue-property-decorator';
 import { EditMode } from '@/const';
 
 @Component
-export default class DictionaryModalEdit extends Form {
+export default class DirectoryModalEdit extends Form {
   @Prop({ default: EditMode.ADD }) private editMode!: number; // 编辑模式
   @Prop({ default: () => {} }) private data!: any; // 编辑模式下回显数据用载体
 
   // 表单字段描述
-  public descriptor = {
+  descriptor = {
     code: {
       initialValue: this.data.code,
       rules: [

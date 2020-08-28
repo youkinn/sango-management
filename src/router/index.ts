@@ -46,10 +46,12 @@ const routes: Array<RouteConfig> = [
           ]
         },
         component: () =>
-          import(/* webpackChunkName: "directory" */ '@/views/dictionary/dictionary-list.vue')
+          import(
+            /* webpackChunkName: "directory" */ '@/views/dictionary/directory-list.vue'
+          )
       },
       {
-        path: 'content/:directoryId',
+        path: ':dictionaryId/content',
         name: '内容管理',
         meta: {
           breadcrumb: [
@@ -60,7 +62,7 @@ const routes: Array<RouteConfig> = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "dictionary-content" */ '@/views/dictionary/dictionary-content.vue'
+            /* webpackChunkName: "content" */ '@/views/dictionary/content-list.vue'
           )
       }
     ]

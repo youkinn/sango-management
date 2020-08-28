@@ -28,7 +28,7 @@
       @cancel="isDictionaryEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <DictionaryEditForm
+      <DirectoryModalEdit
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="addDictionary"
@@ -46,21 +46,22 @@ import { EditMode } from '@/const';
 import { DictionaryForm } from '@/types/api';
 import { timeSpanFormat } from '@/utils';
 import { validate, required } from '@/decorators';
-import DictionaryEditForm from '@/components/dictionary/dictionary-edit-form.vue';
+import DirectoryModalEdit from '@/components/dictionary/directory-edit-form.vue';
 
 const columns = [
   {
-    title: 'id',
+    title: '字典id',
     dataIndex: '_id',
+    width: 220,
     align: 'center'
   },
   {
-    title: '编码',
+    title: '字典编码',
     dataIndex: 'code',
     align: 'center'
   },
   {
-    title: '名称',
+    title: '字典名称',
     dataIndex: 'name',
     align: 'center'
   },
@@ -86,7 +87,7 @@ const columns = [
 ];
 
 @Component({
-  components: { DictionaryEditForm }
+  components: { DirectoryModalEdit }
 })
 export default class DictionaryList extends List {
   // 列表相关
@@ -168,7 +169,7 @@ export default class DictionaryList extends List {
   // 查看字典内容
   @validate
   viewContent(@required _id: string, @required name: string) {
-    this.$emit('viewContent', _id, `字典内容-${name}`, `/base/dictionary/content/${_id}`);
+    this.$emit('viewContent', _id, `字典内容-${name}`, `/base/dictionary/${_id}/content`);
   }
 }
 </script>

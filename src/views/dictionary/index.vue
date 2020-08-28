@@ -2,7 +2,7 @@
   <div class="list">
     <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="edit" @change="refresh">
       <a-tab-pane :tab="pane.title" :closable="pane.closable" :key="pane.key">
-        <dictionary-list @viewContent="add"></dictionary-list>
+        <directory-list @viewContent="add"></directory-list>
       </a-tab-pane>
       <a-tab-pane
         v-for="item in panes.slice(1)"
@@ -19,7 +19,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import TabIndex from '@/components/base/TabIndex';
-import DictionaryList from './dictionary-list.vue';
+import DirectoryList from './directory-list.vue';
 
 const DictionaryPane: Pane = {
   key: 'dictionary',
@@ -29,7 +29,7 @@ const DictionaryPane: Pane = {
 };
 
 @Component({
-  components: { DictionaryList }
+  components: { DirectoryList }
 })
 export default class Dictionary extends TabIndex {
   pane = DictionaryPane;
