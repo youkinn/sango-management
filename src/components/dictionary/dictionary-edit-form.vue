@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import Form from '@/components/global/Form';
+import Form from '@/components/base/Form';
 import { Component, Prop } from 'vue-property-decorator';
 import { EditMode } from '@/const';
 

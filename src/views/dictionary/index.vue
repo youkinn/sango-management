@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import TabIndex from '@/components/global/TabIndex';
+import TabIndex from '@/components/base/TabIndex';
 import DictionaryList from './dictionary-list.vue';
 
 const DictionaryPane: Pane = {

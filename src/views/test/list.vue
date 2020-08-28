@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import List from '@/components/global/List';
+import List from '@/components/base/List';
 import { Component } from 'vue-property-decorator';
 import { getUserList } from '@/api/index';
 
