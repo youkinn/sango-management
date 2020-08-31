@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 14:31:22
+ * @LastEditTime: 2020-08-31 19:17:13
 -->
 <template>
   <a-form
@@ -31,8 +31,10 @@
     </a-form-item>
 
     <a-form-item :wrapper-col="{ span: 12, offset: 5 }" v-if="!readonly">
-      <a-button class="mr20" type="primary" :loading="loading" html-type="submit">提交</a-button>
-      <a-button @click.prevent="cancel">取消</a-button>
+      <a-space>
+        <a-button type="primary" :loading="loading" html-type="submit">提交</a-button>
+        <a-button @click.prevent="cancel">取消</a-button>
+      </a-space>
     </a-form-item>
   </a-form>
 </template>

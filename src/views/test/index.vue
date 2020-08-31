@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-24 20:41:49
+ * @LastEditTime: 2020-08-31 17:20:27
 -->
 <template>
   <div class="home">
@@ -14,12 +14,7 @@
       @submit.prevent="handleSubmit"
     >
       <a-form-item label="Note">
-        <a-input
-          v-focus
-          v-decorator="['name', options.name]"
-          :maxLength="20"
-          placeholder="请输入姓名"
-        />
+        <a-input v-decorator="['name', options.name]" :maxLength="20" placeholder="请输入姓名" />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
         <a-button class="submitButton" type="primary" html-type="submit">提交</a-button>

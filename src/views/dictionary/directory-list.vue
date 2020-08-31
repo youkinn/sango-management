@@ -1,7 +1,9 @@
 <template>
   <div class="list">
-    <a-row class="mb20">
-      <a-button type="primary" @click="add">添加字典</a-button>
+    <directory-list-search-bar class="mb10" :loading="loading" @submit="handleSearch" />
+
+    <a-row class="mb10">
+      <a-button type="primary" icon="plus" @click="add">添加字典</a-button>
     </a-row>
 
     <a-table
@@ -47,6 +49,7 @@ import { DictionaryForm } from '@/types/api';
 import { timeSpanFormat } from '@/utils';
 import { validate, required } from '@/decorators';
 import DirectoryModalEdit from '@/components/dictionary/directory-edit-form.vue';
+import DirectoryListSearchBar from '@/components/dictionary/directory-list-search-bar.vue';
 
 const columns = [
   {
@@ -87,14 +90,13 @@ const columns = [
 ];
 
 @Component({
-  components: { DirectoryModalEdit }
+  components: { DirectoryModalEdit, DirectoryListSearchBar }
 })
 export default class DictionaryList extends List {
   // 列表相关
   private list: object[] = [];
   private searchParams = {
-    code: undefined,
-    name: undefined
+    keyword: undefined
   };
   private columns = columns;
 
@@ -119,11 +121,20 @@ export default class DictionaryList extends List {
 
   // 获取字典列表
   async getList() {
+    this.loading = true;
     const { current: page, pageSize } = this.pagination;
     const params = Object.assign({}, this.searchParams, { page, pageSize });
     const res = await getDictionaryList(params);
+    this.loading = false;
     this.list = res.data.results;
     this.pagination.total = res.data.count;
+  }
+
+  // 用户点击[查询]按钮
+  handleSearch(params: { keyword?: string }) {
+    this.pagination.current = 1;
+    this.searchParams = Object.assign({}, this.searchParams, params);
+    this.getList();
   }
 
   // 用户点击[添加字典]按钮

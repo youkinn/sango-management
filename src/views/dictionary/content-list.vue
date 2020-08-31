@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <a-row class="mb20">
-      <a-button type="primary" @click="add">添加內容</a-button>
+      <a-button type="primary" icon="plus" @click="add">添加內容</a-button>
     </a-row>
 
     <a-table
@@ -119,8 +119,10 @@ export default class DictionaryContentList extends Vue {
 
   // 获取字典内容列表
   async getList() {
+    this.loading = true;
     const res = await getDictionaryContentList(this.dictionaryId);
     this.list = res.data.results;
+    this.loading = false;
   }
 
   // 查看字典内容

@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-25 09:31:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 16:18:02
+ * @LastEditTime: 2020-08-31 19:16:39
 -->
 <template>
   <a-form
@@ -13,10 +13,14 @@
     @submit.prevent="handleSubmit"
   >
     <a-form-item label="字典编码">
-      <a-input v-decorator="['code', descriptor.code]" :maxLength="20" placeholder="请输入名字" />
+      <a-input
+        v-decorator="['code', descriptor.code]"
+        :maxLength="20"
+        placeholder="请输入字典编码"
+      />
     </a-form-item>
     <a-form-item label="字典名称">
-      <a-input v-decorator="['name', descriptor.name]" :maxLength="20" placeholder="请输入名字" />
+      <a-input v-decorator="['name', descriptor.name]" :maxLength="20" placeholder="请输入名称" />
     </a-form-item>
     <a-form-item label="字典描述">
       <a-textarea
@@ -26,8 +30,10 @@
       />
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-      <a-button class="mr20" type="primary" :loading="loading" html-type="submit">提交</a-button>
-      <a-button @click.prevent="cancel">取消</a-button>
+      <a-space>
+        <a-button type="primary" :loading="loading" html-type="submit">提交</a-button>
+        <a-button @click.prevent="cancel">取消</a-button>
+      </a-space>
     </a-form-item>
   </a-form>
 </template>

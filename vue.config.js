@@ -47,7 +47,7 @@ module.exports = {
         'https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js',
         'https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js',
         'https://cdn.jsdelivr.net/npm/moment@2.27.0/locale/zh-cn.js',
-        'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.4/dist/antd.min.js'
+        'https://cdn.jsdelivr.net/npm/ant-design-vue@1.6.5/dist/antd.min.js'
       ]
     };
 

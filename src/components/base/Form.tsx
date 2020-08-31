@@ -3,16 +3,17 @@
  * @Autor: 胡椒
  * @Date: 2020-08-24 17:50:28
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-25 13:10:23
+ * @LastEditTime: 2020-08-31 18:53:01
  */
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { VNode } from 'vue';
 import { throttle, catchError } from '@/decorators';
 
 @Component
 export default class Form extends Vue {
   /** 加载中 */
-  protected loading = false;
+  @Prop({ default: false }) protected loading?: boolean;
+
   /** 表单 */
   protected form: any;
 
