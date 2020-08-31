@@ -10,7 +10,7 @@
         :tab="item.title"
         :closable="item.closable"
       >
-        <router-view></router-view>
+        <router-view :key="$route.name + new Date().getTime()"></router-view>
       </a-tab-pane>
     </a-tabs>
   </div>

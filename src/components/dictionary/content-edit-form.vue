@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 18:20:40
+ * @LastEditTime: 2020-08-31 13:58:18
 -->
 <template>
   <a-form
@@ -54,7 +54,7 @@ export default class DirectoryModalEdit extends Form {
       rules: [
         {
           required: true,
-          message: '请输入字典编码'
+          message: '请输入内容编码'
         }
       ]
     },
@@ -63,7 +63,7 @@ export default class DirectoryModalEdit extends Form {
       rules: [
         {
           required: true,
-          message: '请输入字典名称'
+          message: '请输入内容名称'
         }
       ]
     }
@@ -71,7 +71,6 @@ export default class DirectoryModalEdit extends Form {
 
   // 查看模式
   get readonly() {
-    debugger;
     return this.editMode === EditMode.VIEW;
   }
 }

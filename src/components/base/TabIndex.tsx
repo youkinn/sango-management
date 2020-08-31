@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 09:37:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 10:19:22
+ * @LastEditTime: 2020-08-31 14:00:20
  */
 import { Vue, Component } from 'vue-property-decorator';
 import { VNode } from 'vue';
@@ -54,13 +54,6 @@ export default class TabIndex extends Vue {
     if (this.$route.fullPath !== lastPane.path) {
       this.$router.push(lastPane.path);
     }
-  }
-
-  /** 标签操作-点击标签相应跳转 */
-  @validate
-  refresh(@required targetKey: string) {
-    const path = this.panes.filter(pane => pane.key === targetKey)[0].path;
-    this.$router.push(path);
   }
 
   render(createElement: () => VNode): VNode {
