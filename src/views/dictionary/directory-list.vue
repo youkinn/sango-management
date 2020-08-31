@@ -16,9 +16,11 @@
       @change="handleTableChange"
     >
       <template slot="operation" slot-scope="record">
-        <a-button class="mr10" size="small" @click="edit(record)">编辑</a-button>
-        <a-button class="mr10" size="small" @click="del(record._id)">删除</a-button>
-        <a-button size="small" @click="viewContent(record._id, record.name)">字典内容</a-button>
+        <a-space>
+          <a-button size="small" @click="edit(record)">编辑</a-button>
+          <a-button size="small" @click="del(record._id)">删除</a-button>
+          <a-button size="small" @click="viewContent(record._id, record.name)">字典内容</a-button>
+        </a-space>
       </template>
     </a-table>
 
