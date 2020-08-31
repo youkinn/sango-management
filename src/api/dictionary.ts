@@ -3,7 +3,7 @@
  * @Author: youkinn
  * @Date: 2020-08-25 00:23:54
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 17:51:03
+ * @LastEditTime: 2020-08-31 16:20:05
  *
  */
 import { GET, POST, PATCH, DELETE } from '@/api/axios';
@@ -36,6 +36,14 @@ export const editDictionary = (
 /** 删除字典 */
 export const delDictionary = (id: string): Promise<ResponseBase<object>> => {
   return DELETE(`/dictionary/${id}`);
+};
+
+/** 检测字典编码是否已存在 */
+export const checkDictionaryCodeExist = (params: {
+  _id?: string;
+  code: string;
+}): Promise<ResponseBase<number>> => {
+  return GET('/dictionaryExist', params);
 };
 
 /** 获取字典内容列表 */

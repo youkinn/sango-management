@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 13:58:18
+ * @LastEditTime: 2020-08-31 14:31:22
 -->
 <template>
   <a-form
@@ -44,8 +44,10 @@ import { EditMode } from '@/const';
 
 @Component
 export default class DirectoryModalEdit extends Form {
-  @Prop({ default: EditMode.ADD }) private editMode!: number; // 编辑模式
-  @Prop({ default: () => {} }) private data!: any; // 编辑模式下回显数据用载体
+  /** 编辑模式 */
+  @Prop({ default: EditMode.ADD }) private editMode!: number;
+  /** 编辑模式下回显数据用载体 */
+  @Prop({ default: () => {} }) private data!: any;
 
   // 表单字段描述
   descriptor = {

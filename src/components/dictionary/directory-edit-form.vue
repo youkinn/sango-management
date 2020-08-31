@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-25 09:31:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 17:55:39
+ * @LastEditTime: 2020-08-31 16:18:02
 -->
 <template>
   <a-form
@@ -36,20 +36,36 @@
 import Form from '@/components/base/Form';
 import { Component, Prop } from 'vue-property-decorator';
 import { EditMode } from '@/const';
+import { checkDictionaryCodeExist } from '@/api';
 
 @Component
 export default class DirectoryModalEdit extends Form {
-  @Prop({ default: EditMode.ADD }) private editMode!: number; // 编辑模式
-  @Prop({ default: () => {} }) private data!: any; // 编辑模式下回显数据用载体
+  /** 编辑模式 */
+  @Prop({ default: EditMode.ADD }) private editMode!: number;
+  /** 编辑模式下回显数据用载体 */
+  @Prop({ default: () => {} }) private data!: any;
 
   // 表单字段描述
   descriptor = {
     code: {
       initialValue: this.data.code,
+      trigger: 'blur',
       rules: [
         {
           required: true,
           message: '请输入字典编码'
+        },
+        {
+          validator: async (rule: object, value: string, callback: Function) => {
+            const _id = this.data._id;
+            const code = value;
+            const { data } = await checkDictionaryCodeExist({ _id, code });
+            if (data > 0) {
+              callback(new Error('编码已存在'));
+            } else {
+              callback();
+            }
+          }
         }
       ]
     },
