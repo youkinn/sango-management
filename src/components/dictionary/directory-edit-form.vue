@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-25 09:31:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 19:16:39
+ * @LastEditTime: 2020-09-01 20:33:49
 -->
 <template>
   <a-form
@@ -45,7 +45,7 @@ import { EditMode } from '@/const';
 import { checkDictionaryCodeExist } from '@/api';
 
 @Component
-export default class DirectoryModalEdit extends Form {
+export default class DirectoryEditForm extends Form {
   /** 编辑模式 */
   @Prop({ default: EditMode.ADD }) private editMode!: number;
   /** 编辑模式下回显数据用载体 */

@@ -29,7 +29,7 @@
       @cancel="isDictionaryEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <ContentModalEdit
+      <ContentEditForm
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="handleSubmit"
@@ -50,7 +50,7 @@ import {
 import { EditMode } from '@/const';
 import { DictionaryContentForm } from '@/types/api';
 import { validate, required } from '@/decorators';
-import ContentModalEdit from '@/components/dictionary/content-edit-form.vue';
+import ContentEditForm from '@/components/dictionary/content-edit-form.vue';
 
 const columns = [
   {
@@ -78,7 +78,7 @@ const columns = [
 ];
 
 @Component({
-  components: { ContentModalEdit }
+  components: { ContentEditForm }
 })
 export default class DictionaryContentList extends Vue {
   // 列表相关

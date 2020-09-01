@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 19:17:13
+ * @LastEditTime: 2020-09-01 20:38:13
 -->
 <template>
   <a-form
@@ -45,7 +45,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import { EditMode } from '@/const';
 
 @Component
-export default class DirectoryModalEdit extends Form {
+export default class ContentEditFrom extends Form {
   /** 编辑模式 */
   @Prop({ default: EditMode.ADD }) private editMode!: number;
   /** 编辑模式下回显数据用载体 */

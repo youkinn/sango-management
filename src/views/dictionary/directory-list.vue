@@ -32,7 +32,7 @@
       @cancel="isDictionaryEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <DirectoryModalEdit
+      <DirectoryEditForm
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="addDictionary"
@@ -50,7 +50,7 @@ import { EditMode } from '@/const';
 import { DictionaryForm } from '@/types/api';
 import { timeSpanFormat } from '@/utils';
 import { validate, required } from '@/decorators';
-import DirectoryModalEdit from '@/components/dictionary/directory-edit-form.vue';
+import DirectoryEditForm from '@/components/dictionary/directory-edit-form.vue';
 import DirectoryListSearchBar from '@/components/dictionary/directory-list-search-bar.vue';
 
 const columns = [
@@ -92,7 +92,7 @@ const columns = [
 ];
 
 @Component({
-  components: { DirectoryModalEdit, DirectoryListSearchBar }
+  components: { DirectoryEditForm, DirectoryListSearchBar }
 })
 export default class DictionaryList extends List {
   // 列表相关
