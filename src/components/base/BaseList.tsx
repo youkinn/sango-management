@@ -3,13 +3,14 @@
  * @Autor: 胡椒
  * @Date: 2020-08-24 17:50:28
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-25 20:15:35
+ * @LastEditTime: 2020-09-02 14:52:56
  */
 import { Vue, Component } from 'vue-property-decorator';
 import { VNode } from 'vue';
 
 const pageSize = 10;
 
+/** 分页信息 */
 interface Pagination {
   /** 当前页数 */
   current: number;
@@ -31,11 +32,11 @@ interface Pagination {
 
 @Component
 export default class List extends Vue {
-  /** 加载中 */
+  /** 列表加载中 */
   protected loading = false;
 
   /** 分页信息 */
-  public pagination: Pagination = {
+  protected pagination: Pagination = {
     current: 1,
     pageSize: pageSize,
     pageSizeOptions: ['10', '20', '30', '40', '50'],
@@ -51,7 +52,7 @@ export default class List extends Vue {
 
   getList() {}
 
-  // 分页
+  /** 分页 */
   handleTableChange(pagination: Pagination) {
     if (pagination) {
       this.pagination.current = pagination.current;

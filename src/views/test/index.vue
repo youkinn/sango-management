@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 17:20:27
+ * @LastEditTime: 2020-09-02 18:10:07
 -->
 <template>
   <div class="home">
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import List from '@/components/base/List';
+import BaseList from '@/components/base/BaseList';
 import { Component, Prop } from 'vue-property-decorator';
 import { getUserList, addUser } from '@/api/index';
 import { throttle } from '@/decorators';
@@ -41,7 +41,7 @@ interface AFrom {
 }
 
 @Component
-export default class Test extends List {
+export default class Test extends BaseList {
   @Prop() private clickHandler!: Function;
   name = '';
   list: object[] = [];

@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 09:37:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 16:24:12
+ * @LastEditTime: 2020-09-02 14:18:47
  */
 import { Vue, Component } from 'vue-property-decorator';
 import { VNode } from 'vue';
@@ -13,8 +13,10 @@ const panes: Pane[] = [];
 
 @Component
 export default class TabIndex extends Vue {
-  protected activeKey = panes[0]?.key; // 当前活动标签的唯一标识
-  panes: Pane[] = []; // 用于缓冲当前的标签
+  /** 当前活动标签的唯一标识 */
+  protected activeKey = panes[0]?.key;
+  /** 用于缓冲当前的标签 */
+  panes: Pane[] = [];
 
   edit(targetKey: string, action: string) {
     (this as any)[action](targetKey);

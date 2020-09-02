@@ -31,8 +31,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
-import Menu from '@/components/layout/menu.vue';
-import Breadcrumb from '@/components/layout/breadcrumb.vue';
+import Menu from '@/components/layout/TheMenu.vue';
+import Breadcrumb from '@/components/layout/TheBreadcrumb.vue';
 
 @Component({
   name: 'Home',

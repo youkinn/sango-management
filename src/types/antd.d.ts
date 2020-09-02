@@ -1,3 +1,4 @@
+/* eslint-disable */
 interface zhCN {
   [key: string]: any;
 }

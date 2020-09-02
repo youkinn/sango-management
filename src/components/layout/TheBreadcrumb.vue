@@ -1,3 +1,10 @@
+<!--
+ * @Description: 面包屑
+ * @Autor: 胡椒
+ * @Date: 2020-08-17 10:33:13
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-09-02 18:41:26
+-->
 <template>
   <div>
     <a-breadcrumb v-if="$route.meta.breadcrumb && $route.meta.breadcrumb.length > 0">
@@ -12,6 +19,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+/** 面包屑 */
 @Component
 export default class Menu extends Vue {
   public breadcrumbs = this.$route.meta.breadcrumb;

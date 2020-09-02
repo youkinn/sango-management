@@ -1,3 +1,10 @@
+<!--
+ * @Description: 字典内容列表
+ * @Autor: 胡椒
+ * @Date: 2020-08-27 12:35:33
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-09-02 18:43:56
+-->
 <template>
   <div class="list">
     <a-row class="mb20">
@@ -24,17 +31,18 @@
     <!-- 新增/编辑字典弹框 -->
     <a-modal
       :title="modalTitle"
-      :visible="isDictionaryEditModalVisible"
+      :visible="isContentEditModalVisible"
       :footer="false"
-      @cancel="isDictionaryEditModalVisible = false"
+      @cancel="isContentEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <ContentEditForm
+      <content-list-edit-from
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="handleSubmit"
-        @cancel="isDictionaryEditModalVisible = false"
-      />
+        @cancel="isContentEditModalVisible = false"
+      >
+      </content-list-edit-from>
     </a-modal>
   </div>
 </template>
@@ -50,7 +58,7 @@ import {
 import { EditMode } from '@/const';
 import { DictionaryContentForm } from '@/types/api';
 import { validate, required } from '@/decorators';
-import ContentEditForm from '@/components/dictionary/content-edit-form.vue';
+import ContentListEditForm from '@/components/dictionary/ContentListEditForm.vue';
 
 const columns = [
   {
@@ -77,27 +85,33 @@ const columns = [
   }
 ];
 
+/** 字典内容 */
 @Component({
-  components: { ContentEditForm }
+  components: { ContentListEditForm }
 })
 export default class DictionaryContentList extends Vue {
-  // 列表相关
+  /** 字典内容列表 */
   private list: object[] = [];
+  /** 列表加载中标识 */
   private loading = false;
+  /** 列表展示字典 */
   private columns = columns;
+  /** 所属字典id-$route上获取 */
   private dictionaryId = '';
 
-  // 弹框相关
-  private isDictionaryEditModalVisible = false; // 是否显示编辑弹框
-  private editMode = EditMode.ADD; // 编辑模式
-  private currentRecord = {}; // 当前记录-用于数据回显
+  /** 是否显示编辑弹框 */
+  private isContentEditModalVisible = false;
+  /** 编辑模式 */
+  private editMode = EditMode.ADD;
+  /** 当前记录-用于数据回显 */
+  private currentRecord = {};
 
-  // 是否编辑模式
+  /** 是否编辑模式 */
   private get isEditMode() {
     return this.editMode === EditMode.EDIT;
   }
 
-  // 弹框标题
+  /** 弹框标题 */
   private get modalTitle() {
     let title = '';
     switch (this.editMode) {
@@ -119,7 +133,7 @@ export default class DictionaryContentList extends Vue {
     this.getList();
   }
 
-  // 获取字典内容列表
+  /** 获取字典内容列表 */
   async getList() {
     this.loading = true;
     const res = await getDictionaryContentList(this.dictionaryId);
@@ -127,38 +141,38 @@ export default class DictionaryContentList extends Vue {
     this.loading = false;
   }
 
-  // 查看字典内容
+  /** 查看字典内容 */
   view(record: any) {
     this.editMode = EditMode.VIEW;
     this.currentRecord = record;
-    this.isDictionaryEditModalVisible = true;
+    this.isContentEditModalVisible = true;
   }
 
-  // 用户点击[添加內容]按钮
+  /** 用户点击[添加內容]按钮 */
   add() {
     this.editMode = EditMode.ADD;
     this.currentRecord = {};
-    this.isDictionaryEditModalVisible = true;
+    this.isContentEditModalVisible = true;
   }
 
-  // 用户点击[编辑]按钮
+  /** 用户点击[编辑]按钮 */
   edit(record: any) {
     this.editMode = EditMode.EDIT;
     this.currentRecord = record;
-    this.isDictionaryEditModalVisible = true;
+    this.isContentEditModalVisible = true;
   }
 
-  // 添加/编辑字典内容
+  /** 添加/编辑字典内容 */
   async handleSubmit(params: DictionaryContentForm) {
     this.isEditMode
       ? await editDictionaryContent(this.dictionaryId, (this.currentRecord as any)._id, params)
       : await addDictionaryContent(this.dictionaryId, params);
     this.$message.success('操作成功');
-    this.isDictionaryEditModalVisible = false;
+    this.isContentEditModalVisible = false;
     this.getList();
   }
 
-  // 删除字典内容
+  /** 删除字典内容 */
   @validate
   del(@required _id: string) {
     const that = this;

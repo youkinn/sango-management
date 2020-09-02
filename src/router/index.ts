@@ -14,7 +14,7 @@ const routes: Array<RouteConfig> = [
     path: '/test',
     redirect: '/test/list',
     name: '测试',
-    component: () => import(/* webpackChunkName: "base" */ '@/views/layout.vue'),
+    component: () => import(/* webpackChunkName: "base" */ '@/views/Layout.vue'),
     children: [
       {
         path: 'list',
@@ -26,14 +26,14 @@ const routes: Array<RouteConfig> = [
             }
           ]
         },
-        component: () => import(/* webpackChunkName: "test.list" */ '@/views/test/list.vue')
+        component: () => import(/* webpackChunkName: "test.list" */ '@/views/test/List.vue')
       }
     ]
   },
   {
     path: '/base/dictionary',
     name: '基础信息',
-    component: () => import(/* webpackChunkName: "base" */ '@/views/dictionary/index.vue'),
+    component: () => import(/* webpackChunkName: "base" */ '@/views/dictionary/Index.vue'),
     children: [
       {
         path: 'directory',
@@ -46,9 +46,7 @@ const routes: Array<RouteConfig> = [
           ]
         },
         component: () =>
-          import(
-            /* webpackChunkName: "directory" */ '@/views/dictionary/directory-list.vue'
-          )
+          import(/* webpackChunkName: "directory" */ '@/views/dictionary/DirectoryList.vue')
       },
       {
         path: ':dictionaryId/content',
@@ -61,9 +59,7 @@ const routes: Array<RouteConfig> = [
           ]
         },
         component: () =>
-          import(
-            /* webpackChunkName: "content" */ '@/views/dictionary/content-list.vue'
-          )
+          import(/* webpackChunkName: "content" */ '@/views/dictionary/ContentList.vue')
       }
     ]
   },

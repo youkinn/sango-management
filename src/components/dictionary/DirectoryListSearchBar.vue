@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-31 17:34:26
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 18:37:00
+ * @LastEditTime: 2020-09-02 18:08:14
 -->
 <template>
   <a-form :form="form" layout="inline" @submit.prevent="handleSubmit">
@@ -22,9 +22,10 @@
 </template>
 
 <script lang="ts">
-import Form from '@/components/base/Form';
+import BaseForm from '@/components/base/BaseForm';
 import { Component } from 'vue-property-decorator';
 
+/** 字典目录检索区域 */
 @Component
-export default class DirectoryListSearchBar extends Form {}
+export default class DirectoryListSearchBar extends BaseForm {}
 </script>

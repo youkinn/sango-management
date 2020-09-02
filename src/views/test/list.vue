@@ -2,8 +2,8 @@
  * @Description: 列表页
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
- * @LastEditors: youkinn
- * @LastEditTime: 2020-08-25 00:23:34
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-09-02 18:09:47
 -->
 <template>
   <div class="list">
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import List from '@/components/base/List';
+import BaseList from '@/components/base/BaseList';
 import { Component } from 'vue-property-decorator';
 import { getUserList } from '@/api/index';
 
@@ -48,7 +48,7 @@ const columns = [
 ];
 
 @Component
-export default class Test extends List {
+export default class Test extends BaseList {
   list: object[] = [];
   columns = columns;
 

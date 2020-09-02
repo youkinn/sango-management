@@ -1,3 +1,10 @@
+<!--
+ * @Description: 字典管理
+ * @Autor: 胡椒
+ * @Date: 2020-08-31 16:21:52
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-09-02 18:42:12
+-->
 <template>
   <div class="list">
     <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="edit" @change="refresh">
@@ -18,8 +25,8 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import TabIndex from '@/components/base/TabIndex';
-import DirectoryList from './directory-list.vue';
+import BaseTabIndex from '@/components/base/BaseTabIndex';
+import DirectoryList from './DirectoryList.vue';
 
 const DictionaryPane: Pane = {
   key: 'dictionary',
@@ -31,7 +38,7 @@ const DictionaryPane: Pane = {
 @Component({
   components: { DirectoryList }
 })
-export default class Dictionary extends TabIndex {
+export default class Dictionary extends BaseTabIndex {
   pane = DictionaryPane;
 
   created() {

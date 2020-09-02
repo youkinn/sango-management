@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 11:36:40
+ * @LastEditTime: 2020-09-02 18:06:09
  */
 import App from './App.vue';
 import router from './router';
@@ -11,7 +11,7 @@ import store from './store';
 import directives from '@/directives/index';
 import filters from '@/filters/index';
 import '@/assets/less/index.less';
-import "vue-tsx-support/enable-check";
+import 'vue-tsx-support/enable-check';
 
 Vue.config.productionTip = false;
 Vue.use(antd);

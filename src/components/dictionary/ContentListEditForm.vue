@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-01 20:38:13
+ * @LastEditTime: 2020-09-02 18:08:01
 -->
 <template>
   <a-form
@@ -40,19 +40,34 @@
 </template>
 
 <script lang="ts">
-import Form from '@/components/base/Form';
+import BaseForm from '@/components/base/BaseForm';
 import { Component, Prop } from 'vue-property-decorator';
 import { EditMode } from '@/const';
 
+/** 字典內容新增/编辑表单 */
 @Component
-export default class ContentEditFrom extends Form {
+export default class ContentEditFrom extends BaseForm {
   /** 编辑模式 */
-  @Prop({ default: EditMode.ADD }) private editMode!: number;
-  /** 编辑模式下回显数据用载体 */
-  @Prop({ default: () => {} }) private data!: any;
+  @Prop({
+    type: Number,
+    required: true,
+    default: EditMode.ADD,
+    validator: (value: number) => {
+      return [EditMode.VIEW, EditMode.ADD, EditMode.EDIT].includes(value);
+    }
+  })
+  private editMode!: number;
 
-  // 表单字段描述
+  /** 编辑模式下回显数据用载体 */
+  @Prop({
+    type: Object,
+    default: () => {}
+  })
+  private data!: any;
+
+  /** 表单字段描述 */
   descriptor = {
+    /** 内容编码 */
     code: {
       initialValue: this.data.code,
       rules: [
@@ -62,6 +77,8 @@ export default class ContentEditFrom extends Form {
         }
       ]
     },
+
+    /** 内容名称 */
     name: {
       initialValue: this.data.name,
       rules: [
@@ -73,7 +90,7 @@ export default class ContentEditFrom extends Form {
     }
   };
 
-  // 查看模式
+  /** 查看模式 */
   get readonly() {
     return this.editMode === EditMode.VIEW;
   }

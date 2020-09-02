@@ -1,3 +1,10 @@
+<!--
+ * @Description: 字典目录列表
+ * @Autor: 胡椒
+ * @Date: 2020-08-27 11:44:59
+ * @LastEditors: 胡椒
+ * @LastEditTime: 2020-09-02 18:44:14
+-->
 <template>
   <div class="list">
     <directory-list-search-bar class="mb10" :loading="loading" @submit="handleSearch" />
@@ -32,26 +39,27 @@
       @cancel="isDictionaryEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <DirectoryEditForm
+      <directory-list-edit-form
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="addDictionary"
         @cancel="isDictionaryEditModalVisible = false"
-      />
+      >
+      </directory-list-edit-form>
     </a-modal>
   </div>
 </template>
 
 <script lang="ts">
-import List from '@/components/base/List';
+import BaseList from '@/components/base/BaseList';
 import { Component } from 'vue-property-decorator';
 import { getDictionaryList, addDictionary, editDictionary, delDictionary } from '@/api';
 import { EditMode } from '@/const';
 import { DictionaryForm } from '@/types/api';
 import { timeSpanFormat } from '@/utils';
 import { validate, required } from '@/decorators';
-import DirectoryEditForm from '@/components/dictionary/directory-edit-form.vue';
-import DirectoryListSearchBar from '@/components/dictionary/directory-list-search-bar.vue';
+import DirectoryListEditForm from '@/components/dictionary/DirectoryListEditForm.vue';
+import DirectoryListSearchBar from '@/components/dictionary/DirectoryListSearchBar.vue';
 
 const columns = [
   {
@@ -91,28 +99,34 @@ const columns = [
   }
 ];
 
+/** 字典目录 */
 @Component({
-  components: { DirectoryEditForm, DirectoryListSearchBar }
+  components: { DirectoryListEditForm, DirectoryListSearchBar }
 })
-export default class DictionaryList extends List {
-  // 列表相关
+export default class DictionaryList extends BaseList {
+  /** 字典列表 */
   private list: object[] = [];
+  /** 查询条件 */
   private searchParams = {
+    /** 关键字 */
     keyword: undefined
   };
+  /** 列表展示字段 */
   private columns = columns;
 
-  // 弹框相关
-  private isDictionaryEditModalVisible = false; // 是否显示编辑弹框
-  private editMode = EditMode.ADD; // 编辑模式
-  private currentRecord = {}; // 当前记录-用于数据回显
+  /** 是否显示编辑弹框 */
+  private isDictionaryEditModalVisible = false;
+  /** 编辑模式 */
+  private editMode = EditMode.ADD;
+  /** 当前记录-用于数据回显 */
+  private currentRecord = {};
 
-  // 是否编辑模式
+  /** 是否编辑模式 */
   private get isEditMode() {
     return this.editMode === EditMode.EDIT;
   }
 
-  // 弹框标题
+  /** 弹框标题 */
   private get modalTitle() {
     return (this.isEditMode ? '编辑' : '新增') + '字典';
   }
@@ -121,7 +135,7 @@ export default class DictionaryList extends List {
     this.getList();
   }
 
-  // 获取字典列表
+  /** 获取字典列表 */
   async getList() {
     this.loading = true;
     const { current: page, pageSize } = this.pagination;
@@ -132,28 +146,28 @@ export default class DictionaryList extends List {
     this.pagination.total = res.data.count;
   }
 
-  // 用户点击[查询]按钮
+  /** 用户点击[查询]按钮 */
   handleSearch(params: { keyword?: string }) {
     this.pagination.current = 1;
     this.searchParams = Object.assign({}, this.searchParams, params);
     this.getList();
   }
 
-  // 用户点击[添加字典]按钮
+  /** 用户点击[添加字典]按钮 */
   add() {
     this.editMode = EditMode.ADD;
     this.currentRecord = {};
     this.isDictionaryEditModalVisible = true;
   }
 
-  // 用户点击[编辑]按钮
+  /** 用户点击[编辑]按钮 */
   edit(record: any) {
     this.editMode = EditMode.EDIT;
     this.currentRecord = record;
     this.isDictionaryEditModalVisible = true;
   }
 
-  // 添加/编辑字典
+  /** 添加/编辑字典 */
   async addDictionary(params: DictionaryForm) {
     this.isEditMode
       ? await editDictionary((this.currentRecord as any)._id, params)
@@ -163,7 +177,7 @@ export default class DictionaryList extends List {
     this.getList();
   }
 
-  // 删除字典
+  /** 删除字典 */
   @validate
   del(@required _id: string) {
     const that = this;

@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-28 10:01:01
+ * @LastEditTime: 2020-09-02 18:41:36
 -->
 <template>
   <div>
@@ -25,6 +25,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Menu } from 'ant-design-vue';
 
+/** 左侧菜单 */
 @Component({
   components: {
     AMenu: Menu

@@ -3,7 +3,7 @@
  * @Author: youkinn
  * @Date: 2020-08-25 00:23:54
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-31 16:20:05
+ * @LastEditTime: 2020-09-02 15:03:12
  *
  */
 import { GET, POST, PATCH, DELETE } from '@/api/axios';
@@ -15,7 +15,7 @@ import {
 
 /** 获取字典列表 */
 export const getDictionaryList = (
-  params?: DictionaryListQueryParams
+  params: DictionaryListQueryParams
 ): Promise<ResponseBase<ListData>> => {
   return GET('/dictionaries', params);
 };
