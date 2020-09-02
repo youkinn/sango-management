@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-27 12:35:33
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 18:43:56
+ * @LastEditTime: 2020-09-02 18:58:04
 -->
 <template>
   <div class="list">
@@ -36,13 +36,13 @@
       @cancel="isContentEditModalVisible = false"
       :destroyOnClose="true"
     >
-      <content-list-edit-from
+      <content-list-edit-form
         :edit-mode="editMode"
         :data="currentRecord"
         @submit="handleSubmit"
         @cancel="isContentEditModalVisible = false"
       >
-      </content-list-edit-from>
+      </content-list-edit-form>
     </a-modal>
   </div>
 </template>
