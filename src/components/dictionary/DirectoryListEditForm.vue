@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-25 09:31:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 14:55:45
+ * @LastEditTime: 2020-09-03 17:05:24
 -->
 <template>
   <a-form
@@ -15,24 +15,31 @@
     <a-form-item label="字典编码">
       <a-input
         v-decorator="['code', descriptor.code]"
+        :disabled="readonly"
         :maxLength="20"
         placeholder="请输入字典编码"
       />
     </a-form-item>
 
     <a-form-item label="字典名称">
-      <a-input v-decorator="['name', descriptor.name]" :maxLength="20" placeholder="请输入名称" />
+      <a-input
+        v-decorator="['name', descriptor.name]"
+        :disabled="readonly"
+        :maxLength="20"
+        placeholder="请输入名称"
+      />
     </a-form-item>
 
     <a-form-item label="字典描述">
       <a-textarea
         v-decorator="['desc', descriptor.desc]"
         :auto-size="{ minRows: 3, maxRows: 6 }"
+        :disabled="readonly"
         placeholder="请输入简要的描述"
       />
     </a-form-item>
 
-    <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+    <a-form-item :wrapper-col="{ span: 12, offset: 5 }" v-if="!readonly">
       <a-space>
         <a-button type="primary" :loading="loading" html-type="submit">提交</a-button>
         <a-button @click.prevent="cancel">取消</a-button>
@@ -53,7 +60,6 @@ export default class DirectoryEditForm extends BaseForm {
   /** 编辑模式 */
   @Prop({
     type: Number,
-    required: true,
     default: EditMode.ADD,
     validator: (value: number) => {
       return [EditMode.VIEW, EditMode.ADD, EditMode.EDIT].includes(value);
@@ -66,13 +72,13 @@ export default class DirectoryEditForm extends BaseForm {
     type: Object,
     default: () => {}
   })
-  private data!: any;
+  private data: any;
 
   /** 表单字段描述 */
   descriptor = {
     /** 字典编码 */
     code: {
-      initialValue: this.data.code,
+      initialValue: this.data && this.data.code,
       trigger: 'blur',
       rules: [
         {
@@ -96,7 +102,7 @@ export default class DirectoryEditForm extends BaseForm {
 
     /** 字典名称 */
     name: {
-      initialValue: this.data.name,
+      initialValue: this.data && this.data.name,
       rules: [
         {
           required: true,
@@ -107,7 +113,7 @@ export default class DirectoryEditForm extends BaseForm {
 
     /** 字典描述 */
     desc: {
-      initialValue: this.data.desc,
+      initialValue: this.data && this.data.desc,
       rules: [
         {
           max: 20,
@@ -116,5 +122,10 @@ export default class DirectoryEditForm extends BaseForm {
       ]
     }
   };
+
+  /** 查看模式 */
+  get readonly() {
+    return this.editMode === EditMode.VIEW;
+  }
 }
 </script>

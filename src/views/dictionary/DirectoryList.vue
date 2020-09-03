@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-27 11:44:59
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 18:44:14
+ * @LastEditTime: 2020-09-03 17:03:30
 -->
 <template>
   <div class="list">
@@ -24,6 +24,7 @@
     >
       <template slot="operation" slot-scope="record">
         <a-space>
+          <a-button size="small" @click="view(record)">查看</a-button>
           <a-button size="small" @click="edit(record)">编辑</a-button>
           <a-button size="small" @click="del(record._id)">删除</a-button>
           <a-button size="small" @click="viewContent(record._id, record.name)">字典内容</a-button>
@@ -128,7 +129,19 @@ export default class DictionaryList extends BaseList {
 
   /** 弹框标题 */
   private get modalTitle() {
-    return (this.isEditMode ? '编辑' : '新增') + '字典';
+    let title = '';
+    switch (this.editMode) {
+      case EditMode.VIEW:
+        title = '查看';
+        break;
+      case EditMode.ADD:
+        title = '新增';
+        break;
+      case EditMode.EDIT:
+        title = '编辑';
+        break;
+    }
+    return title;
   }
 
   created() {
@@ -151,6 +164,13 @@ export default class DictionaryList extends BaseList {
     this.pagination.current = 1;
     this.searchParams = Object.assign({}, this.searchParams, params);
     this.getList();
+  }
+
+  /** 查看字典内容 */
+  view(record: any) {
+    this.editMode = EditMode.VIEW;
+    this.currentRecord = record;
+    this.isDictionaryEditModalVisible = true;
   }
 
   /** 用户点击[添加字典]按钮 */
