@@ -1,7 +1,7 @@
-const GET = jest.fn(() => Promise.resolve({ data: {} }));
-const POST = jest.fn(() => Promise.resolve({ data: {} }));
+const mockAxios: any = jest.genMockFromModule('axios');
+mockAxios.create = jest.fn(() => mockAxios);
 
-export default {
-  GET,
-  POST
-};
+mockAxios.GET = jest.fn(() => Promise.resolve({ data: {} }));
+mockAxios.POST = jest.fn(() => Promise.resolve({ data: {} }));
+
+export default mockAxios;

@@ -23,6 +23,7 @@ module.exports = {
     }
   },
   configureWebpack: config => {
+    config.devtool = 'source-map';
     config.externals = {
       vue: 'Vue',
       'ant-design-vue': 'antd',

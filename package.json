@@ -22,7 +22,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.19",
+    "@types/jest": "^26.0.13",
     "@types/lodash": "^4.14.159",
     "@types/sinon": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
@@ -45,7 +45,8 @@
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "sinon": "^9.0.3",
-    "typescript": "^4.0.0",
+    "ts-jest": "^26.3.0",
+    "typescript": "^3.9.3",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.8.0"
   }

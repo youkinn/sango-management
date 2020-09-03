@@ -1,15 +1,7 @@
-beforeAll(() => {
-  console.log('beforeAll');
-});
+beforeAll(() => {});
 
-afterAll(() => {
-  console.log('afterAll');
-});
+afterAll(() => {});
 
-beforeEach(() => {
-  console.log('beforeEach');
-});
+beforeEach(() => {});
 
-afterEach(() => {
-  console.log('afterEach');
-});
+afterEach(() => {});

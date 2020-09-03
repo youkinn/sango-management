@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-11 16:13:16
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-25 20:14:56
+ * @LastEditTime: 2020-09-03 14:36:27
  */
 import axios, { AxiosRequestConfig } from 'axios';
 import { message } from 'ant-design-vue';
@@ -114,4 +114,4 @@ export const PATCH = <T>(
   return request(Object.assign({}, { url: url, method: 'PATCH', params }, options));
 };
 
-export default { GET, POST };
+export default { GET, DELETE, POST, PATCH };

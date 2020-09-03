@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-21 12:47:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-08-26 18:18:15
+ * @LastEditTime: 2020-09-03 11:08:20
  */
 import 'reflect-metadata'; // WeakMap<any, Map<any, Map<any, any>>>  -> weakMap.get(o).get(p).get(k)
 import { debounce as debounceFn, throttle as throttleFn } from 'lodash';
@@ -18,9 +18,10 @@ export const debounce = (wait = 3000): MethodDecorator => {
 };
 
 /** 节流处理-wait指定触发间隔(默认3s) */
-export const throttle = function(wait = 3000): MethodDecorator {
+export const throttle = function(wait = 2000): MethodDecorator {
   return function(target, propertyKey, descriptor: PropertyDescriptor) {
-    descriptor.value = throttleFn(descriptor.value, wait, { trailing: false });
+    const fn = descriptor.value;
+    descriptor.value = throttleFn(fn, wait, { trailing: false });
   };
 };
 
