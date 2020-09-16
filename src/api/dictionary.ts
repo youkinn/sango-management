@@ -10,12 +10,12 @@ import { GET, POST, PATCH, DELETE } from '@/api/axios';
 import {
   DictionaryListQueryParams,
   DictionaryForm,
-  DictionaryContentForm
+  DictionaryContentForm,
 } from '@/types/api/index';
 
 /** 获取字典列表 */
 export const getDictionaryList = (
-  params: DictionaryListQueryParams
+  params: DictionaryListQueryParams,
 ): Promise<ResponseBase<ListData>> => {
   return GET('/dictionaries', params);
 };
@@ -28,7 +28,7 @@ export const addDictionary = (params: DictionaryForm): Promise<ResponseBase<obje
 /** 编辑字典 */
 export const editDictionary = (
   id: string,
-  params: DictionaryForm
+  params: DictionaryForm,
 ): Promise<ResponseBase<object>> => {
   return PATCH(`/dictionary/${id}`, params);
 };
@@ -54,7 +54,7 @@ export const getDictionaryContentList = (dictionaryId: string): Promise<Response
 /** 添加字典内容 */
 export const addDictionaryContent = (
   dictionaryId: string,
-  params: DictionaryContentForm
+  params: DictionaryContentForm,
 ): Promise<ResponseBase<object>> => {
   return POST(`/dictionary/${dictionaryId}/content`, params);
 };
@@ -63,7 +63,7 @@ export const addDictionaryContent = (
 export const editDictionaryContent = (
   dictionaryId: string,
   contentId: string,
-  params: DictionaryContentForm
+  params: DictionaryContentForm,
 ): Promise<ResponseBase<object>> => {
   return PATCH(`/dictionary/${dictionaryId}/content/${contentId}`, params);
 };
@@ -71,7 +71,7 @@ export const editDictionaryContent = (
 /** 删除字典内容 */
 export const delDictionaryContent = (
   dictionaryId: string,
-  contentId: string
+  contentId: string,
 ): Promise<ResponseBase<object>> => {
   return DELETE(`/dictionary/${dictionaryId}/content/${contentId}`);
 };

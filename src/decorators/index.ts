@@ -12,7 +12,7 @@ import { debounce as debounceFn, throttle as throttleFn } from 'lodash';
 export const debounce = (wait = 3000): MethodDecorator => {
   return (target, propertyKey, descriptor: PropertyDescriptor) => {
     descriptor.value = debounceFn(descriptor.value, wait || 3000, {
-      trailing: false
+      trailing: false,
     });
   };
 };
@@ -29,7 +29,7 @@ export const throttle = function(wait = 2000): MethodDecorator {
 export const catchError: MethodDecorator = function(
   target,
   propertyKey,
-  descriptor: PropertyDescriptor
+  descriptor: PropertyDescriptor,
 ) {
   const fn = descriptor.value;
   descriptor.value = function(...args: any[]) {
@@ -47,7 +47,7 @@ const requiredMetadataKey = Symbol('required');
 export const required: ParameterDecorator = function(
   target: object,
   propertyKey: string | symbol,
-  parameterIndex: number
+  parameterIndex: number,
 ) {
   const existingRequiredParameters: number[] =
     Reflect.getOwnMetadata(requiredMetadataKey, target, propertyKey) || [];
@@ -59,14 +59,14 @@ export const required: ParameterDecorator = function(
 export const validate: MethodDecorator = function(
   target,
   propertyKey,
-  descriptor: PropertyDescriptor
+  descriptor: PropertyDescriptor,
 ) {
   const method = descriptor.value;
   descriptor.value = function(...args: any[]) {
     const requiredParameters: number[] = Reflect.getOwnMetadata(
       requiredMetadataKey,
       target,
-      propertyKey
+      propertyKey,
     );
     if (requiredParameters) {
       for (const parameterIndex of requiredParameters) {

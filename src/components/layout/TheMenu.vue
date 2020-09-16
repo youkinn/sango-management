@@ -28,8 +28,8 @@ import { Menu } from 'ant-design-vue';
 /** 左侧菜单 */
 @Component({
   components: {
-    AMenu: Menu
-  }
+    AMenu: Menu,
+  },
 })
 export default class Menu1 extends Vue {
   rootSubmenuKeys = ['home', 'base'];

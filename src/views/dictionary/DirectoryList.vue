@@ -67,22 +67,22 @@ const columns = [
     title: '字典id',
     dataIndex: '_id',
     width: 220,
-    align: 'center'
+    align: 'center',
   },
   {
     title: '字典编码',
     dataIndex: 'code',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '字典名称',
     dataIndex: 'name',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '描述',
     dataIndex: 'desc',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '最后修改时间',
@@ -90,19 +90,19 @@ const columns = [
     align: 'center',
     customRender(text: string) {
       return timeSpanFormat(text);
-    }
+    },
   },
   {
     title: '操作',
     align: 'center',
     width: 220,
-    scopedSlots: { customRender: 'operation' }
-  }
+    scopedSlots: { customRender: 'operation' },
+  },
 ];
 
 /** 字典目录 */
 @Component({
-  components: { DirectoryListEditForm, DirectoryListSearchBar }
+  components: { DirectoryListEditForm, DirectoryListSearchBar },
 })
 export default class DictionaryList extends BaseList {
   /** 字典列表 */
@@ -110,7 +110,7 @@ export default class DictionaryList extends BaseList {
   /** 查询条件 */
   private searchParams = {
     /** 关键字 */
-    keyword: undefined
+    keyword: undefined,
   };
   /** 列表展示字段 */
   private columns = columns;
@@ -209,7 +209,7 @@ export default class DictionaryList extends BaseList {
         that.$message.success('操作成功');
         that.getList();
         return result;
-      }
+      },
     });
   }
 

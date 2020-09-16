@@ -47,7 +47,7 @@ export default class List extends Vue {
     showSizeChanger: true,
     onShowSizeChange: (current: number, pageSize: number) => {
       this.pagination.pageSize = pageSize;
-    }
+    },
   };
 
   getList() {}

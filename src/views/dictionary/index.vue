@@ -32,11 +32,11 @@ const DictionaryPane: Pane = {
   key: 'dictionary',
   title: '字典目录',
   path: '/base/dictionary/directory',
-  closable: false
+  closable: false,
 };
 
 @Component({
-  components: { DirectoryList }
+  components: { DirectoryList },
 })
 export default class Dictionary extends BaseTabIndex {
   pane = DictionaryPane;

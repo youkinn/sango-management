@@ -46,10 +46,10 @@ export default class Home extends Vue {
       rules: [
         {
           required: true,
-          message: '请输入姓名'
-        }
-      ]
-    }
+          message: '请输入姓名',
+        },
+      ],
+    },
   };
 
   beforeCreate() {

@@ -8,7 +8,7 @@ const routes: Array<RouteConfig> = [
     path: '/',
     alias: '/home',
     name: '首页',
-    component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
   },
   {
     path: '/test',
@@ -22,13 +22,13 @@ const routes: Array<RouteConfig> = [
         meta: {
           breadcrumb: [
             {
-              name: '测试'
-            }
-          ]
+              name: '测试',
+            },
+          ],
         },
-        component: () => import(/* webpackChunkName: "test.list" */ '@/views/test/List.vue')
-      }
-    ]
+        component: () => import(/* webpackChunkName: "test.list" */ '@/views/test/List.vue'),
+      },
+    ],
   },
   {
     path: '/base/dictionary',
@@ -41,12 +41,12 @@ const routes: Array<RouteConfig> = [
         meta: {
           breadcrumb: [
             {
-              name: '基本信息'
-            }
-          ]
+              name: '基本信息',
+            },
+          ],
         },
         component: () =>
-          import(/* webpackChunkName: "directory" */ '@/views/dictionary/DirectoryList.vue')
+          import(/* webpackChunkName: "directory" */ '@/views/dictionary/DirectoryList.vue'),
       },
       {
         path: ':dictionaryId/content',
@@ -54,31 +54,31 @@ const routes: Array<RouteConfig> = [
         meta: {
           breadcrumb: [
             {
-              name: '基本信息'
-            }
-          ]
+              name: '基本信息',
+            },
+          ],
         },
         component: () =>
-          import(/* webpackChunkName: "content" */ '@/views/dictionary/ContentList.vue')
-      }
-    ]
+          import(/* webpackChunkName: "content" */ '@/views/dictionary/ContentList.vue'),
+      },
+    ],
   },
   {
     path: '/500',
     name: 'ServerError',
-    component: () => import(/* webpackChunkName: "serverError" */ '@/views/error/500.vue')
+    component: () => import(/* webpackChunkName: "serverError" */ '@/views/error/500.vue'),
   },
   {
     path: '/404',
     name: 'NotFound',
-    component: () => import(/* webpackChunkName: "notFound" */ '@/views/error/404.vue')
-  }
+    component: () => import(/* webpackChunkName: "notFound" */ '@/views/error/404.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

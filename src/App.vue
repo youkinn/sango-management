@@ -18,7 +18,7 @@
             margin: '24px 16px',
             padding: '24px',
             background: '#fff',
-            minHeight: '280px'
+            minHeight: '280px',
           }"
         >
           <Breadcrumb class="breadcrumb"></Breadcrumb>
@@ -38,8 +38,8 @@ import Breadcrumb from '@/components/layout/TheBreadcrumb.vue';
   name: 'Home',
   components: {
     Menu,
-    Breadcrumb
-  }
+    Breadcrumb,
+  },
 })
 export default class App extends Vue {
   collapsed = false;

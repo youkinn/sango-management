@@ -16,7 +16,7 @@ const filters: PluginObject<object> = {
         Vue.filter(`${item.name}Filter`, item);
       });
     });
-  }
+  },
 };
 
 export default filters;

@@ -11,7 +11,7 @@ const qs = require('qs');
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_PATH,
-  timeout: 30000
+  timeout: 30000,
 });
 
 const ERROR_MESSAGE = '哎呀, 服务器开小差了';
@@ -22,12 +22,12 @@ instance.interceptors.request.use(
     const { csrfToken } = qs.parse(document.cookie);
     config.headers = {
       'content-type': 'application/x-www-form-urlencoded',
-      'x-csrf-token': csrfToken
+      'x-csrf-token': csrfToken,
     };
     const t = new Date().getTime();
     const params = {
       ...config.params,
-      t
+      t,
     };
     const method = config.method?.toUpperCase() as string;
     if (['GET', 'DELETE', 'HEAD', 'OPTIONS'].includes(method)) {
@@ -41,7 +41,7 @@ instance.interceptors.request.use(
   err => {
     message.error(ERROR_MESSAGE);
     return Promise.resolve(err);
-  }
+  },
 );
 
 // 响应拦截器
@@ -57,7 +57,7 @@ instance.interceptors.response.use(
   err => {
     message.error('哎呀, 请求出问题了');
     return Promise.reject(err);
-  }
+  },
 );
 
 /** 发起一个请求 */
@@ -73,7 +73,7 @@ const request = <T>(config: AxiosRequestConfig): Promise<ResponseBase<T>> => {
           reject(result);
         }
       },
-      err => reject(err)
+      err => reject(err),
     );
   });
 };
@@ -82,7 +82,7 @@ const request = <T>(config: AxiosRequestConfig): Promise<ResponseBase<T>> => {
 export const GET = <T>(
   url: string,
   params?: RequestParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<ResponseBase<T>> => {
   return request(Object.assign({ url: url, method: 'GET', params }, options));
 };
@@ -91,7 +91,7 @@ export const GET = <T>(
 export const DELETE = <T>(
   url: string,
   params?: RequestParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<ResponseBase<T>> => {
   return request(Object.assign({ url: url, method: 'DELETE', params }, options));
 };
@@ -100,7 +100,7 @@ export const DELETE = <T>(
 export const POST = <T>(
   url: string,
   params: RequestParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<ResponseBase<T>> => {
   return request(Object.assign({}, { url: url, method: 'POST', params }, options));
 };
@@ -109,7 +109,7 @@ export const POST = <T>(
 export const PATCH = <T>(
   url: string,
   params: RequestParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<ResponseBase<T>> => {
   return request(Object.assign({}, { url: url, method: 'PATCH', params }, options));
 };

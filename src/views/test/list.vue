@@ -32,19 +32,19 @@ const columns = [
   {
     title: '编码',
     dataIndex: '_id',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '姓名',
     dataIndex: 'name',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '操作',
     align: 'center',
     width: 120,
-    scopedSlots: { customRender: 'operation' }
-  }
+    scopedSlots: { customRender: 'operation' },
+  },
 ];
 
 @Component

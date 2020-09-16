@@ -32,7 +32,7 @@ export default class TabIndex extends Vue {
         title: title,
         key: activeKey,
         path: path,
-        closable: true
+        closable: true,
       });
     }
     this.activeKey = activeKey;

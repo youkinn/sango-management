@@ -63,14 +63,14 @@ export default class DirectoryEditForm extends BaseForm {
     default: EditMode.ADD,
     validator: (value: number) => {
       return [EditMode.VIEW, EditMode.ADD, EditMode.EDIT].includes(value);
-    }
+    },
   })
   private editMode!: number;
 
   /** 编辑模式下回显数据用载体 */
   @Prop({
     type: Object,
-    default: () => {}
+    default: () => {},
   })
   private data: any;
 
@@ -83,7 +83,7 @@ export default class DirectoryEditForm extends BaseForm {
       rules: [
         {
           required: true,
-          message: '请输入字典编码'
+          message: '请输入字典编码',
         },
         {
           validator: async (rule: object, value: string, callback: Function) => {
@@ -95,9 +95,9 @@ export default class DirectoryEditForm extends BaseForm {
             } else {
               callback();
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
 
     /** 字典名称 */
@@ -106,9 +106,9 @@ export default class DirectoryEditForm extends BaseForm {
       rules: [
         {
           required: true,
-          message: '请输入字典名称'
-        }
-      ]
+          message: '请输入字典名称',
+        },
+      ],
     },
 
     /** 字典描述 */
@@ -117,10 +117,10 @@ export default class DirectoryEditForm extends BaseForm {
       rules: [
         {
           max: 20,
-          message: '最多输入20个字符'
-        }
-      ]
-    }
+          message: '最多输入20个字符',
+        },
+      ],
+    },
   };
 
   /** 查看模式 */

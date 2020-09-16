@@ -13,5 +13,5 @@ export enum EditMode {
   /** 新增 */
   ADD,
   /** 编辑 */
-  EDIT
+  EDIT,
 }

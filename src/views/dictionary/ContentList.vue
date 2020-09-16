@@ -53,7 +53,7 @@ import {
   getDictionaryContentList,
   addDictionaryContent,
   editDictionaryContent,
-  delDictionaryContent
+  delDictionaryContent,
 } from '@/api';
 import { EditMode } from '@/const';
 import { DictionaryContentForm } from '@/types/api';
@@ -65,29 +65,29 @@ const columns = [
     title: '内容id',
     dataIndex: '_id',
     width: 220,
-    align: 'center'
+    align: 'center',
   },
   {
     title: '内容编码',
     dataIndex: 'code',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '内容名称',
     dataIndex: 'name',
-    align: 'center'
+    align: 'center',
   },
   {
     title: '操作',
     align: 'center',
     width: 220,
-    scopedSlots: { customRender: 'operation' }
-  }
+    scopedSlots: { customRender: 'operation' },
+  },
 ];
 
 /** 字典内容 */
 @Component({
-  components: { ContentListEditForm }
+  components: { ContentListEditForm },
 })
 export default class DictionaryContentList extends Vue {
   /** 字典内容列表 */
@@ -184,7 +184,7 @@ export default class DictionaryContentList extends Vue {
         that.$message.success('操作成功');
         that.getList();
         return result;
-      }
+      },
     });
   }
 }

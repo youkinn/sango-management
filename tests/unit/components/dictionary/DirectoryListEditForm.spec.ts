@@ -2,7 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import antd from 'ant-design-vue';
 import DirectoryListEditForm from '@/components/dictionary/DirectoryListEditForm.vue';
 import { EditMode } from '@/const';
-import { checkDictionaryCodeExist } from '@/api';
 import axios from '@/api/__mocks__/axios';
 
 jest.mock('@/api/axios');
@@ -14,7 +13,7 @@ localVue.use(antd);
 const factory = (values = {}) => {
   return mount(DirectoryListEditForm, {
     localVue,
-    ...values
+    ...values,
   });
 };
 
@@ -26,9 +25,9 @@ describe('DirectoryListSearchBar', () => {
         data: {
           code: '100101',
           name: '性别',
-          desc: '性别描述'
-        }
-      }
+          desc: '性别描述',
+        },
+      },
     });
     await wrapper.vm.$nextTick();
     expect((wrapper.vm as any).editMode).toBe(EditMode.VIEW);
@@ -42,8 +41,8 @@ describe('DirectoryListSearchBar', () => {
     const wrapper = factory({
       propsData: {
         editMode: EditMode.ADD,
-        data: {}
-      }
+        data: {},
+      },
     });
     await wrapper.vm.$nextTick();
     expect((wrapper.vm as any).editMode).toBe(EditMode.ADD);
@@ -60,9 +59,9 @@ describe('DirectoryListSearchBar', () => {
         data: {
           code: '100101',
           name: '性别',
-          desc: '性别描述'
-        }
-      }
+          desc: '性别描述',
+        },
+      },
     });
     await wrapper.vm.$nextTick();
     expect((wrapper.vm as any).editMode).toBe(EditMode.EDIT);
@@ -79,9 +78,9 @@ describe('DirectoryListSearchBar', () => {
         data: {
           code: '100101',
           name: '性别',
-          desc: '性别描述'
-        }
-      }
+          desc: '性别描述',
+        },
+      },
     });
     await wrapper.vm.$nextTick();
     const inputCode = wrapper.find('input#code');
@@ -92,7 +91,7 @@ describe('DirectoryListSearchBar', () => {
     axios.get.mockResolvedValueOnce(() => {
       return Promise.resolve({
         data: 1,
-        success: true
+        success: true,
       });
     });
 

@@ -15,7 +15,7 @@ export default class Form extends Vue {
   /** 处理中 */
   @Prop({
     type: Boolean,
-    default: false
+    default: false,
   })
   protected loading?: boolean;
 

@@ -8,7 +8,7 @@ localVue.use(antd);
 
 const factory = () => {
   return mount(DirectoryListSearchBar, {
-    localVue
+    localVue,
   });
 };
 

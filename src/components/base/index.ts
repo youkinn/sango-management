@@ -7,7 +7,7 @@ const components: PluginObject<object> = {
       const componentEntity = contexts(item).default;
       Vue.component(componentEntity.name, componentEntity);
     });
-  }
+  },
 };
 
 export default components;

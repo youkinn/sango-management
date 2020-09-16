@@ -10,6 +10,6 @@ export default {
   definition: {
     inserted: function(el: HTMLElement) {
       el.focus();
-    }
-  }
+    },
+  },
 };

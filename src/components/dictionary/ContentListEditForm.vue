@@ -54,14 +54,14 @@ export default class ContentEditFrom extends BaseForm {
     default: EditMode.ADD,
     validator: (value: number) => {
       return [EditMode.VIEW, EditMode.ADD, EditMode.EDIT].includes(value);
-    }
+    },
   })
   private editMode!: number;
 
   /** 编辑模式下回显数据用载体 */
   @Prop({
     type: Object,
-    default: () => {}
+    default: () => {},
   })
   private data!: any;
 
@@ -73,9 +73,9 @@ export default class ContentEditFrom extends BaseForm {
       rules: [
         {
           required: true,
-          message: '请输入内容编码'
-        }
-      ]
+          message: '请输入内容编码',
+        },
+      ],
     },
 
     /** 内容名称 */
@@ -84,10 +84,10 @@ export default class ContentEditFrom extends BaseForm {
       rules: [
         {
           required: true,
-          message: '请输入内容名称'
-        }
-      ]
-    }
+          message: '请输入内容名称',
+        },
+      ],
+    },
   };
 
   /** 查看模式 */

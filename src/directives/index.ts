@@ -16,7 +16,7 @@ const directives: PluginObject<object> = {
       const { id, definition }: DirectiveDefinition = contexts(item).default;
       Vue.directive(id, definition);
     });
-  }
+  },
 };
 
 export default directives;
