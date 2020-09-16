@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-27 11:44:59
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-03 17:03:30
+ * @LastEditTime: 2020-09-16 15:23:33
 -->
 <template>
   <div class="list">
@@ -188,7 +188,9 @@ export default class DictionaryList extends BaseList {
   }
 
   /** 添加/编辑字典 */
-  async addDictionary(params: DictionaryForm) {
+  async addDictionary(formData: DictionaryForm) {
+    const params = Object.assign({}, formData);
+    params.code = params.code.padStart(6, '0');
     this.isEditMode
       ? await editDictionary((this.currentRecord as any)._id, params)
       : await addDictionary(params);

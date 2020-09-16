@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-28 14:38:10
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 18:08:01
+ * @LastEditTime: 2020-09-16 15:38:47
 -->
 <template>
   <a-form
@@ -12,11 +12,15 @@
     :wrapper-col="{ span: 12 }"
     @submit.prevent="handleSubmit"
   >
+    <a-form-item label="目录名称">
+      <a-input :value="directoryName" disabled />
+    </a-form-item>
+
     <a-form-item label="內容编码">
       <a-input
         v-decorator="['code', descriptor.code]"
+        :maxLength="4"
         :disabled="readonly"
-        :maxLength="20"
         placeholder="请输入内容编码"
       />
     </a-form-item>
@@ -25,7 +29,7 @@
       <a-input
         v-decorator="['name', descriptor.name]"
         :disabled="readonly"
-        :maxLength="20"
+        :maxLength="10"
         placeholder="请输入內容名称"
       />
     </a-form-item>
@@ -58,6 +62,13 @@ export default class ContentEditFrom extends BaseForm {
   })
   private editMode!: number;
 
+  /** 所属字典目录名称 */
+  @Prop({
+    type: String,
+    required: true,
+  })
+  private directoryName!: string;
+
   /** 编辑模式下回显数据用载体 */
   @Prop({
     type: Object,
@@ -74,6 +85,10 @@ export default class ContentEditFrom extends BaseForm {
         {
           required: true,
           message: '请输入内容编码',
+        },
+        {
+          pattern: /^(\d){1,4}$/,
+          message: '请输入1-4位数字',
         },
       ],
     },

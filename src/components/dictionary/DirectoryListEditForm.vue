@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-25 09:31:09
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-03 17:05:24
+ * @LastEditTime: 2020-09-16 15:43:50
 -->
 <template>
   <a-form
@@ -16,7 +16,7 @@
       <a-input
         v-decorator="['code', descriptor.code]"
         :disabled="readonly"
-        :maxLength="20"
+        :maxLength="6"
         placeholder="请输入字典编码"
       />
     </a-form-item>
@@ -25,7 +25,7 @@
       <a-input
         v-decorator="['name', descriptor.name]"
         :disabled="readonly"
-        :maxLength="20"
+        :maxLength="10"
         placeholder="请输入名称"
       />
     </a-form-item>
@@ -35,6 +35,7 @@
         v-decorator="['desc', descriptor.desc]"
         :auto-size="{ minRows: 3, maxRows: 6 }"
         :disabled="readonly"
+        :maxLength="20"
         placeholder="请输入简要的描述"
       />
     </a-form-item>
@@ -70,25 +71,31 @@ export default class DirectoryEditForm extends BaseForm {
   /** 编辑模式下回显数据用载体 */
   @Prop({
     type: Object,
+    required: true,
     default: () => {},
   })
-  private data: any;
+  private data!: any;
 
   /** 表单字段描述 */
   descriptor = {
     /** 字典编码 */
     code: {
-      initialValue: this.data && this.data.code,
+      initialValue: this.data.code,
       trigger: 'blur',
       rules: [
         {
-          required: true,
-          message: '请输入字典编码',
-        },
-        {
           validator: async (rule: object, value: string, callback: Function) => {
             const _id = this.data._id;
-            const code = value;
+            let code = value && value.trim();
+            if (code === '') {
+              callback(new Error('请输入字典编码'));
+              return;
+            }
+            if (!/^(\d){1,6}$/.test(code)) {
+              callback(new Error('请输入1-6位数字'));
+              return;
+            }
+            code = code.padStart(6, '0');
             const { data } = await checkDictionaryCodeExist({ _id, code });
             if (data > 0) {
               callback(new Error('编码已存在'));
@@ -102,7 +109,7 @@ export default class DirectoryEditForm extends BaseForm {
 
     /** 字典名称 */
     name: {
-      initialValue: this.data && this.data.name,
+      initialValue: this.data.name,
       rules: [
         {
           required: true,
@@ -113,7 +120,7 @@ export default class DirectoryEditForm extends BaseForm {
 
     /** 字典描述 */
     desc: {
-      initialValue: this.data && this.data.desc,
+      initialValue: this.data.desc,
       rules: [
         {
           max: 20,

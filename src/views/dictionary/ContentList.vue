@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-27 12:35:33
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 18:58:04
+ * @LastEditTime: 2020-09-16 15:36:02
 -->
 <template>
   <div class="list">
@@ -38,6 +38,7 @@
     >
       <content-list-edit-form
         :edit-mode="editMode"
+        :directoryName="directoryName"
         :data="currentRecord"
         @submit="handleSubmit"
         @cancel="isContentEditModalVisible = false"
@@ -50,7 +51,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import {
-  getDictionaryContentList,
+  getDictionaryById,
   addDictionaryContent,
   editDictionaryContent,
   delDictionaryContent,
@@ -98,6 +99,8 @@ export default class DictionaryContentList extends Vue {
   private columns = columns;
   /** 所属字典id-$route上获取 */
   private dictionaryId = '';
+  /** 字典目录名称 */
+  private directoryName = '';
 
   /** 是否显示编辑弹框 */
   private isContentEditModalVisible = false;
@@ -136,8 +139,9 @@ export default class DictionaryContentList extends Vue {
   /** 获取字典内容列表 */
   async getList() {
     this.loading = true;
-    const res = await getDictionaryContentList(this.dictionaryId);
-    this.list = res.data.results;
+    const res: any = await getDictionaryById(this.dictionaryId);
+    this.list = res.data.content;
+    this.directoryName = res.data.name;
     this.loading = false;
   }
 
@@ -163,7 +167,9 @@ export default class DictionaryContentList extends Vue {
   }
 
   /** 添加/编辑字典内容 */
-  async handleSubmit(params: DictionaryContentForm) {
+  async handleSubmit(formData: DictionaryContentForm) {
+    const params = Object.assign({}, formData);
+    params.code = params.code.padStart(4, '0');
     this.isEditMode
       ? await editDictionaryContent(this.dictionaryId, (this.currentRecord as any)._id, params)
       : await addDictionaryContent(this.dictionaryId, params);
