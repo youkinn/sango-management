@@ -3,7 +3,7 @@
     <a-layout id="components-layout-demo-custom-trigger">
       <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
         <div class="logo" />
-        <Menu></Menu>
+        <Menu :data="menuList"></Menu>
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
@@ -44,6 +44,31 @@ import Breadcrumb from '@/components/layout/TheBreadcrumb.vue';
 export default class App extends Vue {
   collapsed = false;
   locale = zhCN;
+
+  /** 后期需要读数据库 */
+  menuList = [
+    {
+      id: '1',
+      icon: 'user',
+      title: '首页',
+      path: '/',
+      parentId: '0',
+    },
+    {
+      id: '2',
+      icon: 'team',
+      title: '基本信息',
+      parentId: '0',
+      children: [
+        {
+          id: '2.1',
+          title: '字典管理',
+          path: '/base/dictionary/directory',
+          parentId: '2',
+        },
+      ],
+    },
+  ];
 }
 </script>
 <style>

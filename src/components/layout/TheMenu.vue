@@ -3,50 +3,119 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-09-02 18:41:36
+ * @LastEditTime: 2020-10-01 11:50:54
 -->
 <template>
   <div>
-    <a-menu theme="dark" mode="inline" :default-selected-keys="['home']" @click="handleClicked">
-      <a-menu-item key="home">
-        <a-icon type="user" />
-        <span>首页</span>
-      </a-menu-item>
-      <a-sub-menu key="base">
-        <span slot="title"><a-icon type="team" /><span>基础信息</span></span>
-        <a-menu-item key="dictionary/directory">
-          <span>字典管理</span>
+    <a-menu :openKeys="openKeys" v-model="selectedKeys" mode="inline" theme="dark">
+      <template v-for="item in data">
+        <a-menu-item
+          v-if="!item.children"
+          :key="item.id"
+          @click="onMenuItemClicked(item.key, item.path)"
+        >
+          <a-icon :type="item.icon" />
+          <span>{{ item.title }}</span>
         </a-menu-item>
-      </a-sub-menu>
+        <a-sub-menu v-else :key="item.id" @titleClick="onTitleClick">
+          <span slot="title">
+            <a-icon :type="item.icon" />
+            <span>{{ item.title }}</span>
+          </span>
+          <a-menu-item
+            v-for="subItem in item.children"
+            :key="subItem.id"
+            @click="onMenuItemClicked(subItem.id, subItem.path)"
+          >
+            <span>{{ subItem.title }}</span>
+          </a-menu-item>
+        </a-sub-menu>
+      </template>
     </a-menu>
   </div>
 </template>
+
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Menu } from 'ant-design-vue';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+interface MenuItem {
+  /** 唯一标识 */
+  id: string;
+  /** 菜单小图标 */
+  icon?: string;
+  /** 菜单名称 */
+  title: string;
+  /** 对应的路由路径 */
+  path?: string;
+  /** 子菜单 */
+  children?: MenuItem[];
+  /** 父菜单id */
+  parentId: string;
+}
 
 /** 左侧菜单 */
-@Component({
-  components: {
-    AMenu: Menu,
-  },
-})
-export default class Menu1 extends Vue {
-  rootSubmenuKeys = ['home', 'base'];
-  openKeys = ['home'];
+@Component
+export default class TheMenu extends Vue {
+  /** 菜单项列表 */
+  @Prop({
+    type: Array,
+    required: true,
+    default: () => [],
+  })
+  data!: MenuItem[];
 
-  handleClicked = ({ keyPath = [] }) => {
-    let toPath = '';
-    const currentPath = this.$route.path;
-    const [routeName, moduleName] = keyPath;
-    if (moduleName && routeName) {
-      toPath = `/${moduleName}/${routeName}`;
-    } else if (routeName) {
-      toPath = `/${routeName}`;
+  /** 初始展开的SubMenu菜单项key数组 */
+  openKeys = [this.data[0].id];
+
+  /** 初始选中的菜单项 key 数组 */
+  selectedKeys = this.data[0].children ? [this.data[0].children[0].id] : [];
+
+  mounted() {
+    this.initMenu();
+  }
+
+  /** 初始化菜单项目 */
+  initMenu() {
+    let menu: MenuItem | undefined;
+    this.data.some(item => {
+      menu = this.find(item, location.pathname);
+      if (menu) {
+        return true;
+      }
+    });
+    if (!menu) {
+      menu = this.data[0];
     }
+    this.openKeys = menu.parentId ? [menu.parentId] : [];
+    this.selectedKeys = [menu.id];
+  }
+
+  /** 根据路径查找活动菜单 */
+  find(root: MenuItem, path: string): MenuItem | undefined {
+    if (root.path === path) {
+      return root;
+    }
+    const children = root.children;
+    if (children && children.length > 0) {
+      for (let i = 0, j = children.length; i < j; i++) {
+        return this.find(children[i], path);
+      }
+    }
+  }
+
+  /** 点击子菜单标题 */
+  onTitleClick({ key }: { key: string }) {
+    const index = this.openKeys.indexOf(key);
+    index === -1 ? (this.openKeys = [key]) : this.openKeys.splice(index, 1);
+  }
+
+  /** 点击MenuItem */
+  onMenuItemClicked(key: string, toPath: string) {
+    this.selectedKeys = [key];
+    const currentPath = this.$route.path;
     if (toPath && toPath !== currentPath) {
       this.$router.push(toPath);
     }
-  };
+  }
 }
 </script>
