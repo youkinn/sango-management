@@ -3,7 +3,7 @@
  * @Autor: 胡椒
  * @Date: 2020-08-10 09:32:04
  * @LastEditors: 胡椒
- * @LastEditTime: 2020-10-01 11:50:54
+ * @LastEditTime: 2020-10-01 15:45:30
 -->
 <template>
   <div>
@@ -38,7 +38,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-interface MenuItem {
+/** 菜单项 */
+export interface MenuItem {
   /** 唯一标识 */
   id: string;
   /** 菜单小图标 */
@@ -86,19 +87,23 @@ export default class TheMenu extends Vue {
     if (!menu) {
       menu = this.data[0];
     }
-    this.openKeys = menu.parentId ? [menu.parentId] : [];
+    this.openKeys = +menu.parentId ? [menu.parentId] : [];
     this.selectedKeys = [menu.id];
   }
 
   /** 根据路径查找活动菜单 */
-  find(root: MenuItem, path: string): MenuItem | undefined {
-    if (root.path === path) {
-      return root;
+  find(item: MenuItem, path: string): MenuItem | undefined {
+    if (item.path === path) {
+      return item;
     }
-    const children = root.children;
+    const children = item.children;
     if (children && children.length > 0) {
       for (let i = 0, j = children.length; i < j; i++) {
-        return this.find(children[i], path);
+        const result = this.find(children[i], path);
+        if (!result) {
+          continue;
+        }
+        return result;
       }
     }
   }
