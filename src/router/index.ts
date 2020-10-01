@@ -31,35 +31,47 @@ const routes: Array<RouteConfig> = [
     ],
   },
   {
-    path: '/base/dictionary',
+    path: '/base',
     name: '基础信息',
-    component: () => import(/* webpackChunkName: "base" */ '@/views/dictionary/Index.vue'),
+    component: () => import(/* webpackChunkName: "base" */ '@/views/Layout.vue'),
     children: [
       {
-        path: 'directory',
-        name: '字典目录管理',
-        meta: {
-          breadcrumb: [
-            {
-              name: '基本信息',
-            },
-          ],
-        },
+        path: 'dictionary',
+        name: '字典管理',
         component: () =>
-          import(/* webpackChunkName: "directory" */ '@/views/dictionary/DirectoryList.vue'),
-      },
-      {
-        path: ':dictionaryId/content',
-        name: '内容管理',
-        meta: {
-          breadcrumb: [
-            {
-              name: '基本信息',
+          import(/* webpackChunkName: "dictionaryIndex" */ '@/views/dictionary/Index.vue'),
+        children: [
+          {
+            path: 'directory',
+            name: '字典目录管理',
+            meta: {
+              breadcrumb: [
+                {
+                  name: '基本信息',
+                },
+              ],
             },
-          ],
-        },
-        component: () =>
-          import(/* webpackChunkName: "content" */ '@/views/dictionary/ContentList.vue'),
+            component: () =>
+              import(
+                /* webpackChunkName: "dictionaryDirectory" */ '@/views/dictionary/DirectoryList.vue'
+              ),
+          },
+          {
+            path: ':dictionaryId/content',
+            name: '内容管理',
+            meta: {
+              breadcrumb: [
+                {
+                  name: '基本信息',
+                },
+              ],
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "dictionaryContent" */ '@/views/dictionary/ContentList.vue'
+              ),
+          },
+        ],
       },
     ],
   },
